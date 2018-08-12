@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyMovieDb.Data.EntityConfigurations;
 using MyMovieDb.Models;
 
 namespace MyMovieDb.Data
 {
-    public class MyMovieDbContext : DbContext
+    public class MyMovieDbContext : IdentityDbContext<User>
     {
         public MyMovieDbContext(DbContextOptions<MyMovieDbContext> options)
             :base(options)
@@ -19,14 +20,16 @@ namespace MyMovieDb.Data
         public DbSet<MovieProducers> MovieProducers { get; set; }
         public DbSet<MovieScriptWriters> MovieScriptWriters { get; set; }
         public DbSet<Person> People { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new MovieConfiguration());
             builder.ApplyConfiguration(new PersonConfiguration());
             builder.ApplyConfiguration(new GenreConfiguration());
-            builder.ApplyConfiguration(new MovieGenresConfiguration());         
+            builder.ApplyConfiguration(new MovieGenresConfiguration());
+
+            base.OnModelCreating(builder);
         }
     }
 }

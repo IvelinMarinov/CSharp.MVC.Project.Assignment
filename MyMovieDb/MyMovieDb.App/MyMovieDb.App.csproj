@@ -8,6 +8,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
+    <PackageReference Include="Sendgrid" Version="9.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyMovieDb.Data\MyMovieDb.Data.csproj" />
+    <ProjectReference Include="..\MyMovieDb.Models\MyMovieDb.Models.csproj" />
   </ItemGroup>
 
 </Project>

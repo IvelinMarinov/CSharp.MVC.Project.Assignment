@@ -1,21 +1,22 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 using MyMovieDb.Models.Enums;
 
 namespace MyMovieDb.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
 
-        [StringLength(256)]
-        [Required]
-        public string Username { get; set; }
+        //[StringLength(256)]
+        //[Required]
+        //public string Username { get; set; }
 
-        [EmailAddress]
-        [Required]
-        public string Email { get; set; }
+        //[EmailAddress]
+        //[Required]
+        //public string Email { get; set; }
 
         [StringLength(128)]
         public string FirstName { get; set; }

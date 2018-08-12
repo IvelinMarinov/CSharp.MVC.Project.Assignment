@@ -12,7 +12,7 @@ namespace MyMovieDb.Data.EntityConfigurations
 
             builder.HasMany(g => g.Movies)
                 .WithOne(m => m.Genre)
-                .HasForeignKey(m => m.Genre);
+                .HasForeignKey(m => m.GenreId);
         }
     }
 }
