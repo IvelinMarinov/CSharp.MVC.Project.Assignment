@@ -1,4 +1,6 @@
 ﻿@page
+@using MyMovieDb.App.Helpers
+@using MyMovieDb.Models.Enums
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -6,35 +8,40 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
+<div class="row container">
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <h4>Create a new account.</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-sm-6">
+            @Html.FormGroupFor(m => m.Input.Username)
+            @Html.FormGroupFor(m => m.Input.Email)
+            @Html.FormGroupFor(m => m.Input.Password)
+            @Html.FormGroupFor(m => m.Input.ConfirmPassword)
+        </div>
+        <div class="col-sm-6">
+            @Html.FormGroupFor(m => m.Input.FirstName)
+            @Html.FormGroupFor(m => m.Input.LastName)
+
             <div class="form-group">
-                <label asp-for="Input.Username"></label>
-                <input asp-for="Input.Username" class="form-control" />
-                <span asp-validation-for="Input.Username" class="text-danger"></span>
+                <label asp-for="Input.DateOfBirth"></label>
+                <input type="date" asp-for="Input.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <label asp-for="Input.Gender"></label>
+                @Html.DropDownListFor(
+                    m => m.Input.Gender,
+                    Html.GetEnumSelectList<Gender>(),
+                    "",
+                    new { @class = "form-control" })
+                <span asp-validation-for="Input.Gender" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
+        </div>
+        <div class="col-sm-3">
             <button type="submit" class="btn btn-default">Register</button>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

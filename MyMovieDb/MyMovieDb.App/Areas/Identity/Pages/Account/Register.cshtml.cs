@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using MyMovieDb.Models;
+using MyMovieDb.Models.Enums;
 
 namespace MyMovieDb.App.Areas.Identity.Pages.Account
 {
@@ -60,6 +61,21 @@ namespace MyMovieDb.App.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "First Name")]
+            [StringLength(128)]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Last Name")]
+            [StringLength(128)]
+            public string LastName { get; set; }
+
+            [Display(Name = "Date Of Birth")]
+            [DataType(DataType.Date)]
+            public DateTime DateOfBirth { get; set; }
+
+            [Display(Name = "Gender")]
+            public Gender Gender { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -75,7 +91,11 @@ namespace MyMovieDb.App.Areas.Identity.Pages.Account
                 var user = new User
                 {
                     UserName = Input.Username,
-                    Email = Input.Email
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    DateOfBirth = Input.DateOfBirth,
+                    Gender = Input.Gender
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
