@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
@@ -12,8 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyMovieDb.App.Areas.Identity.Services;
+using MyMovieDb.App.Common;
 using MyMovieDb.Data;
 using MyMovieDb.Models;
+using MyMovieDb.Services.Admin;
+using MyMovieDb.Services.Admin.Interfaces;
 
 namespace MyMovieDb.App
 {
@@ -72,6 +73,10 @@ namespace MyMovieDb.App
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<SendGridOptions>(this.Configuration.GetSection("EmailSettings"));
 
+            services.AddAutoMapper();
+
+            services.AddScoped<IAdminUsersService, AdminUsersService>();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -82,6 +87,7 @@ namespace MyMovieDb.App
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                app.SeedDatabase();
             }
             else
             {
@@ -97,6 +103,9 @@ namespace MyMovieDb.App
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "area",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

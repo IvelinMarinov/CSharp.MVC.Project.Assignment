@@ -6,14 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
     <PackageReference Include="Sendgrid" Version="9.9.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyMovieDb.Common\MyMovieDb.Common.csproj" />
     <ProjectReference Include="..\MyMovieDb.Data\MyMovieDb.Data.csproj" />
     <ProjectReference Include="..\MyMovieDb.Models\MyMovieDb.Models.csproj" />
+    <ProjectReference Include="..\MyMovieDb.Services\MyMovieDb.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
 </Project>
