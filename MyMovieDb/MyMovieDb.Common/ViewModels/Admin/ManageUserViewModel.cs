@@ -2,11 +2,11 @@
 {
     public class ManageUserViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
-        //public string FullName { get; set; }
+        public string FullName { get; set; }
 
         public bool IsModerator { get; set; }
 

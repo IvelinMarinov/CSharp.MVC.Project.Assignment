@@ -1,0 +1,6 @@
+div.message-container {
+    padding-top: 20px;
+    width: 50%;
+    position: absolute;
+    z-index: 100000;
+}

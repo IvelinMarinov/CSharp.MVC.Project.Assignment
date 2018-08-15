@@ -42,13 +42,14 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
-        @if (TempData.ContainsKey("__Message"))
-        {
-            var message = (MessageModel)TempData["__Message"];
-            <message type="@message.Type" message="@message.Message"></message>
-        }
+    @if (TempData.ContainsKey(Constants.MessageText) && TempData.ContainsKey(Constants.MessageType))
+    {
+        <div class="col-sm-offset-3 col-sm-6 message-container">
+            <message type="@TempData[Constants.MessageType]" message="@TempData[Constants.MessageText]"></message>
+        </div>
+    }
 
+    <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>

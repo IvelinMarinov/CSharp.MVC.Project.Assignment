@@ -8,7 +8,8 @@ namespace MyMovieDb.App.Mapping
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, ManageUserViewModel>();
+            CreateMap<User, ManageUserViewModel>()
+                .AfterMap((s,d) => d.FullName = $"{s.FirstName} {s.LastName}");
         }
     }
 }

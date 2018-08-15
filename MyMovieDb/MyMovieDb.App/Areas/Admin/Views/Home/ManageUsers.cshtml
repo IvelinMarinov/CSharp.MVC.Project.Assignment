@@ -1,7 +1,49 @@
-﻿
+﻿@model ICollection<ManageUserViewModel>
 @{
-    ViewData["Title"] = "ManageUsers";
+    ViewData["Title"] = "Manage Users";
 }
 
-<h2>ManageUsers</h2>
+<h2>Manage Users</h2>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.FullName</td>
+                    <th>
+                        @if (!user.IsAdmin)
+                        {
+                        <button class="btn btn-primary">Reset Password</button>
+                        }
+                        else
+                        {
+                            <p class="text-danger">ADMIN</p>
+                        }
+                    </th>
+                    <th>
+                        @if (!user.IsModerator && !user.IsAdmin)
+                        {
+                            <a asp-area="Admin" asp-controller="Home" asp-action="GiveModeratorRightsToUser" asp-route-userId="@user.Id" class="btn btn-success">Give Moderator Rights</a>
+                        }
+                        else if (user.IsModerator && !user.IsAdmin)
+                        {
+                            <a asp-area="Admin" asp-controller="Home" asp-action="RemoveModeratorRightsFromUser" asp-route-userId="@user.Id" class="btn btn-danger">Remove Moderator Rights</a>
+                        }
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
