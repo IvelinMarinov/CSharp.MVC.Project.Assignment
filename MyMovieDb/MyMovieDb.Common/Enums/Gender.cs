@@ -1,4 +1,4 @@
-﻿namespace MyMovieDb.Models.Enums
+﻿namespace MyMovieDb.Common.Enums
 {
     public enum Gender
     {

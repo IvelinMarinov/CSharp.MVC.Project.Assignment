@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MyMovieDb.Models.Enums;
+using MyMovieDb.Common.Enums;
 
 namespace MyMovieDb.Models
 {
@@ -37,8 +37,8 @@ namespace MyMovieDb.Models
         [Required]
         public DateTime DateOfBirth { get; set; }
 
-        [DataType(DataType.Date)]
         [Required]
+        [StringLength(128)]
         public string PlaceOfBirth { get; set; }
         
         [Required]

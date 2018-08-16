@@ -1,0 +1,28 @@
+﻿@model ICollection<MovieShortListModel>
+@{
+    ViewData["Title"] = "All Movies";
+}
+
+<h2>All Movies</h2>
+
+<div class="row">
+    <a class="btn btn-outline-secondary btn-lg">Add new movie</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Title</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

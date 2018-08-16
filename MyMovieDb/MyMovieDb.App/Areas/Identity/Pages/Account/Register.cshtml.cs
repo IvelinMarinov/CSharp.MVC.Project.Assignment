@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using MyMovieDb.Common.Enums;
 using MyMovieDb.Models;
-using MyMovieDb.Models.Enums;
 
 namespace MyMovieDb.App.Areas.Identity.Pages.Account
 {

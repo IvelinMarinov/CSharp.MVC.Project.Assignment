@@ -1,0 +1,36 @@
+﻿@using MyMovieDb.App.Helpers
+@using MyMovieDb.Common.Enums
+@model PersonBindingModel
+
+@{
+    ViewData["Title"] = "Edit Person";
+}
+<br />
+<h4>Edit Person</h4>
+<hr />
+<div asp-validation-summary="All" class="text-danger"></div>
+<form method="post" asp-area="Moderator" asp-controller="People" asp-action="Edit">
+    @Html.HiddenFor(m => m.Id)
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.FormGroupFor(m => m.FirstName)
+            @Html.FormGroupFor(m => m.LastName)
+            @Html.FormGroupFor(m => m.Alias)
+        </div>
+        <div class="col-sm-6">
+            @Html.FormGroupFor(m => m.DateOfBirth)
+            @Html.FormGroupFor(m => m.PlaceOfBirth)
+            @Html.DropDownListFor(
+                m => m.Gender,
+                Html.GetEnumSelectList<Gender>(),
+                "",
+                new {@class = "form-control"})
+        </div>
+    </div>
+    @Html.FormGroupFor(m => m.Biography)
+    @Html.FormGroupFor(m => m.PhotoImageUrl)
+
+    <div class="col-sm-3">
+        <button type="submit" class="btn btn-outline-success">Edit</button>
+    </div>
+</form>

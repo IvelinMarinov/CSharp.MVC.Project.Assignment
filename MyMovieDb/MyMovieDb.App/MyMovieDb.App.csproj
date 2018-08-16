@@ -23,6 +23,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\UsersManage\" />
+    <Folder Include="Areas\Moderator\Models\" />
   </ItemGroup>
 
 </Project>

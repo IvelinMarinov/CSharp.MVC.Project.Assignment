@@ -15,6 +15,8 @@ using MyMovieDb.Data;
 using MyMovieDb.Models;
 using MyMovieDb.Services.Admin;
 using MyMovieDb.Services.Admin.Interfaces;
+using MyMovieDb.Services.Moderator;
+using MyMovieDb.Services.Moderator.Interfaces;
 
 namespace MyMovieDb.App
 {
@@ -76,6 +78,8 @@ namespace MyMovieDb.App
             services.AddAutoMapper();
 
             services.AddScoped<IAdminUsersService, AdminUsersService>();
+            services.AddScoped<IModeratorMovieService, ModeratorMovieService>();
+            services.AddScoped<IModeratorPersonService, ModeratorPersonService>();
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

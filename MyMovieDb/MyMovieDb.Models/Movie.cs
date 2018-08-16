@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MyMovieDb.Models.Enums;
+using MyMovieDb.Common.Enums;
 
 namespace MyMovieDb.Models
 {
