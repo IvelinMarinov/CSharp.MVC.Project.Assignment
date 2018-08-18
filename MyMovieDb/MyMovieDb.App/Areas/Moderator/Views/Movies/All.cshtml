@@ -1,4 +1,9 @@
 ﻿@model ICollection<MovieShortListModel>
+
+@section Scripts {
+    <script src="~/js/delete-modal.js"></script>
+}
+
 @{
     ViewData["Title"] = "All Movies";
 }
@@ -20,9 +25,17 @@
         @foreach (var movie in Model)
         {
             <tr>
-                <td>@movie.Title</td>
+                <td id="item-description">@movie.Title</td>
+                <td>
+                    <a asp-area="Moderator" asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-outline-info">Edit</a>
+                </td>
+                <td>
+                    <a id="deleteBtn-@movie.Id" class="btn btn-outline-danger">Delete</a>
+                </td>
             </tr>
         }
         </tbody>
     </table>
+    
+    @Html.Partial("_ConfirmDeleteModal")
 </div>

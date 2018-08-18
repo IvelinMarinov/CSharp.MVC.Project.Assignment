@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyMovieDb.App.Controllers;
+using MyMovieDb.App.Helpers.Messages;
 using MyMovieDb.Common.BindingModels.Moderator;
 using MyMovieDb.Services.Moderator.Interfaces;
 
@@ -58,9 +59,53 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
                 return this.View(model);
             }
 
-            var result = this.movieService.Add(model);
+            var result = this.movieService.AddMovie(model);
 
             return null;
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var model = this.movieService.GetMovieById(id);
+            model.AllGenres = this.genreService.GetAllGenres();
+            model.AllPeople = this.personService.GetAllPeople();
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MovieBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var result = this.movieService.EditMovie(model);
+            if (result.HasError)
+            {
+                SetMessage(MessageType.Danger, result.Message);
+                return this.View(result);
+            }
+
+            SetMessage(MessageType.Success, $"{model.Title} edited successfully");
+            return this.RedirectToAction("All");
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var result = this.movieService.DeleteMovie(id);
+
+            if (result.HasError)
+            {
+                SetMessage(MessageType.Success, "Internal Server Error");
+                return this.RedirectToAction("All");
+            }
+
+            SetMessage(MessageType.Success, $"{result.Title} deleted successfully");
+            return this.RedirectToAction("All");
         }
     }
 }

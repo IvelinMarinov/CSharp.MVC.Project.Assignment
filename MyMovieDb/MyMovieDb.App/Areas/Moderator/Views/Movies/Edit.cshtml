@@ -2,9 +2,19 @@
 @using MyMovieDb.Common.Enums
 @model MovieBindingModel
 @{
-    ViewData["Title"] = "Add Movie";
+    ViewData["Title"] = "Edit Movie";
 }
 
+@section Scripts{
+    <script>
+        var selectedGenresIdsStr = '@String.Join(" ", Model.SelectedGenresIds)';
+        var selectedActorsIdsStr = '@String.Join(" ", Model.SelectedActorIds)';
+        var selectedDirectorsIdsStr = '@String.Join(" ", Model.SelectedDirectorIds)';
+        var selectedProducersIdsStr = '@String.Join(" ", Model.SelectedProducerIds)';
+        var selectedWritersIdsStr = '@String.Join(" ", Model.SelectedScriptWriterIds)';
+    </script>
+    <script src="~/js/edit-movie.js"></script>
+}
 
 @{
     var genresList = Model.AllGenres
@@ -25,12 +35,11 @@
         }).ToList();
 }
 
-
 <br />
-<h4>Add Movie</h4>
+<h4>Edit Movie</h4>
 <hr />
 <div asp-validation-summary="All" class="text-danger"></div>
-<form method="post" asp-area="Moderator" asp-controller="Movies" asp-action="Add">
+<form method="post" asp-area="Moderator" asp-controller="Movies" asp-action="Edit">
     <div class="row">
         <div class="col-sm-6">
             @Html.FormGroupFor(m => m.Title)
@@ -55,26 +64,16 @@
             @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 8 })
         </div>
 
-
         <div class="col-sm-6">
-            @*<div class="form-group">
-                    @Html.LabelFor(m => m.SelectedGenresIds)
-                    @Html.DropDownListFor(
-                        m => m.SelectedGenresIds,
-                        genresList,
-                        "",
-                        new { @class = "form-control selectpicker", multiple = "true", data_live_search = "true", data_size = "10" })
-                </div>*@
-
-            @Html.MultiselectDropDownListFor(m => m.SelectedGenresIds, genresList)
-            @Html.MultiselectDropDownListFor(m => m.SelectedActorIds, peopleList)
-            @Html.MultiselectDropDownListFor(m => m.SelectedDirectorIds, peopleList)
-            @Html.MultiselectDropDownListFor(m => m.SelectedProducerIds, peopleList)
-            @Html.MultiselectDropDownListFor(m => m.SelectedScriptWriterIds, peopleList)
+            @Html.MultiselectDropDownListFor(m => m.SelectedGenresIds, genresList, "genresDD")
+            @Html.MultiselectDropDownListFor(m => m.SelectedActorIds, peopleList, "actorsDD")
+            @Html.MultiselectDropDownListFor(m => m.SelectedDirectorIds, peopleList, "directorsDD")
+            @Html.MultiselectDropDownListFor(m => m.SelectedProducerIds, peopleList, "producersDD")
+            @Html.MultiselectDropDownListFor(m => m.SelectedScriptWriterIds, peopleList, "writersDD")
         </div>
     </div>
 
-    <button type="submit" class="btn btn-outline-success">Add</button>
+    <button type="submit" class="btn btn-outline-success">Edit</button>
     <a asp-area="Moderator" asp-controller="Movies" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
 </form>
 

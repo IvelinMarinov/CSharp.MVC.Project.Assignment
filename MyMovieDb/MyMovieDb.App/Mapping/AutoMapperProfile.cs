@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using MyMovieDb.Common.BindingModels.Moderator;
 using MyMovieDb.Common.ViewModels.Admin;
 using MyMovieDb.Common.ViewModels.Moderator;
@@ -11,7 +12,7 @@ namespace MyMovieDb.App.Mapping
         public AutoMapperProfile()
         {
             CreateMap<User, ManageUserViewModel>()
-                .AfterMap((s,d) => d.FullName = $"{s.FirstName} {s.LastName}");
+                .AfterMap((s, d) => d.FullName = $"{s.FirstName} {s.LastName}");
 
             CreateMap<Person, PersonBindingModel>();
             CreateMap<PersonBindingModel, Person>();
@@ -21,12 +22,18 @@ namespace MyMovieDb.App.Mapping
             CreateMap<GenreBindingModel, Genre>();
 
             CreateMap<MovieBindingModel, Movie>()
-                .ForMember(src => src.Genres, opts => opts.Ignore())
-                .ForMember(src => src.Actors, opts => opts.Ignore())
-                .ForMember(src => src.Directors, opts => opts.Ignore())
-                .ForMember(src => src.Producers, opts => opts.Ignore())
-                .ForMember(src => src.ScriptWriters, opts => opts.Ignore());
+                .ForMember(dest => dest.Genres, opts => opts.Ignore())
+                .ForMember(dest => dest.Actors, opts => opts.Ignore())
+                .ForMember(dest => dest.Directors, opts => opts.Ignore())
+                .ForMember(dest => dest.Producers, opts => opts.Ignore())
+                .ForMember(dest => dest.ScriptWriters, opts => opts.Ignore());
 
-        }
+            CreateMap<Movie, MovieBindingModel>()
+                .ForMember(dest => dest.SelectedGenresIds,opts => opts.MapFrom(src => src.Genres.Select(mg => mg.GenreId)))
+                .ForMember(dest => dest.SelectedActorIds, opts => opts.MapFrom(src => src.Actors.Select(mg => mg.PersonId)))
+                .ForMember(dest => dest.SelectedDirectorIds, opts => opts.MapFrom(src => src.Directors.Select(mg => mg.PersonId)))
+                .ForMember(dest => dest.SelectedProducerIds, opts => opts.MapFrom(src => src.Producers.Select(mg => mg.PersonId)))
+                .ForMember(dest => dest.SelectedScriptWriterIds, opts => opts.MapFrom(src => src.ScriptWriters.Select(mg => mg.PersonId)));
+       }
     }
 }

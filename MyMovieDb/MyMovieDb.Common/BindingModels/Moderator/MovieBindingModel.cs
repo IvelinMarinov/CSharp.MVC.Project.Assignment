@@ -12,6 +12,7 @@ namespace MyMovieDb.Common.BindingModels.Moderator
         {
             this.AllGenres = new HashSet<GenreViewModel>();
             this.AllPeople = new HashSet<PersonShortViewModel>();
+
             this.SelectedGenresIds = new List<int>();
             this.SelectedActorIds = new List<int>();
             this.SelectedDirectorIds = new List<int>();
@@ -70,6 +71,5 @@ namespace MyMovieDb.Common.BindingModels.Moderator
         public ICollection<PersonShortViewModel> AllPeople { get; set; }
 
         public ICollection<GenreViewModel> AllGenres { get; set; }
-
     }
 }

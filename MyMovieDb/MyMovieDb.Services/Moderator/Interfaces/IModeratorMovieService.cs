@@ -8,6 +8,12 @@ namespace MyMovieDb.Services.Moderator.Interfaces
     {
         ICollection<MovieShortListModel> GetAllMovies();
 
-        MovieBindingModel Add(MovieBindingModel model);
+        MovieBindingModel AddMovie(MovieBindingModel model);
+
+        MovieBindingModel GetMovieById(int id);
+
+        MovieBindingModel EditMovie(MovieBindingModel model);
+
+        MovieBindingModel DeleteMovie(int id);
     }
 }

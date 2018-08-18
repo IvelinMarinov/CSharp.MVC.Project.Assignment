@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MyMovieDb.Common.BindingModels.Moderator;
 using MyMovieDb.Common.ViewModels.Moderator;
 using MyMovieDb.Data;
@@ -30,7 +31,7 @@ namespace MyMovieDb.Services.Moderator
             return movies;
         }
 
-        public MovieBindingModel Add(MovieBindingModel model)
+        public MovieBindingModel AddMovie(MovieBindingModel model)
         {
             //check null premiere date
             var duplicateMovie = DbContext.Movies
@@ -60,6 +61,103 @@ namespace MyMovieDb.Services.Moderator
                 model.SetError("Database error");
                 return model;
             }
+
+            return model;
+        }
+
+        public MovieBindingModel GetMovieById(int id)
+        {
+            var model = new MovieBindingModel();
+
+            var movieDb = DbContext.Movies
+                .Include(m => m.Genres)
+                .Include(m => m.Actors)
+                .Include(m => m.Directors)              
+                .Include(m => m.Producers)
+                .Include(m => m.ScriptWriters)
+                .FirstOrDefault(m => m.Id == id);
+
+            if (movieDb == null)
+            {
+                model.SetError("No such movie in database");
+                return model;
+            }
+
+            model = Mapper.Map<MovieBindingModel>(movieDb);
+            return model;
+        }
+
+        public MovieBindingModel EditMovie(MovieBindingModel model)
+        {
+            var movieDb = DbContext.Movies
+                .Include(m => m.Genres)
+                .Include(m => m.Actors)
+                .Include(m => m.Directors)
+                .Include(m => m.Producers)
+                .Include(m => m.ScriptWriters)
+                .FirstOrDefault(m => m.Id == model.Id);
+
+            if (movieDb == null)
+            {
+                model.SetError("No such movie in database");
+                return model;
+            }
+
+            var genresToRemove = movieDb.Genres;
+            var genresToKeep = model.SelectedGenresIds.Select(id => new MovieGenres {GenreId = id, MovieId = model.Id.Value});
+            
+            var actorsToRemove = movieDb.Actors;
+            var actorsToKeep = model.SelectedActorIds.Select(id => new MovieActors {PersonId = id, MovieId = model.Id.Value});
+            
+            var directorsToRemove = movieDb.Directors;
+            var directorsToKeep = model.SelectedDirectorIds.Select(id => new MovieDirectors { PersonId = id, MovieId = model.Id.Value });
+            
+            var producersToRemove = movieDb.Producers;
+            var producersToKeep = model.SelectedProducerIds.Select(id => new MovieProducers { PersonId = id, MovieId = model.Id.Value });
+       
+            var writersToRemove = movieDb.ScriptWriters;
+            var writersToKeep = model.SelectedScriptWriterIds.Select(id => new MovieScriptWriters { PersonId = id, MovieId = model.Id.Value });
+            
+            try
+            {
+                DbContext.MovieGenres.RemoveRange(genresToRemove);
+                DbContext.MovieGenres.AddRange(genresToKeep);
+                DbContext.MovieActors.RemoveRange(actorsToRemove);
+                DbContext.MovieActors.AddRange(actorsToKeep);
+
+                DbContext.MovieDirectors.RemoveRange(directorsToRemove);
+                DbContext.MovieDirectors.AddRange(directorsToKeep);
+
+                DbContext.MovieProducers.RemoveRange(producersToRemove);
+                DbContext.MovieProducers.AddRange(producersToKeep);
+
+                DbContext.MovieScriptWriters.RemoveRange(writersToRemove);
+                DbContext.MovieScriptWriters.AddRange(writersToKeep);
+
+                DbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                model.SetError("Databasee error");
+                return model;
+            }
+
+            return model;
+        }
+
+        public MovieBindingModel DeleteMovie(int id)
+        {
+            var model = new MovieBindingModel();
+            var movie = DbContext.Movies.Find(id);
+
+            if (movie == null)
+            {
+                model.SetError("No such movie in database");
+                return model;
+            }
+
+            DbContext.Movies.Remove(movie);
+            DbContext.SaveChanges();
 
             return model;
         }
