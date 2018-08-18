@@ -17,10 +17,10 @@ namespace MyMovieDb.Services.Moderator
         {
         }
 
-        public ICollection<PersonShortListViewModel> GetAllPeople()
+        public ICollection<PersonShortViewModel> GetAllPeople()
         {
             var people = DbContext.People
-                .Select(p => new PersonShortListViewModel
+                .Select(p => new PersonShortViewModel
                 {
                     Id = p.Id,
                     FullName = $"{p.FirstName} {p.LastName}"
@@ -47,7 +47,7 @@ namespace MyMovieDb.Services.Moderator
             }
         }
 
-        public PersonBindingModel GetPersonForEditing(int id)
+        public PersonBindingModel GetPersonById(int id)
         {
             var model = new PersonBindingModel();
 
@@ -83,20 +83,21 @@ namespace MyMovieDb.Services.Moderator
             return model;
         }
 
-        public bool DeletePerson(int id)
+        public PersonBindingModel DeletePerson(int id)
         {
-            var person = DbContext.People
-                .Find(id);
+            var model = new PersonBindingModel();
+            var person = DbContext.People.Find(id);
 
             if (person == null)
             {
-                return false;
+                model.SetError("No such person in database");
+                return model;
             }
 
             DbContext.People.Remove(person);
             DbContext.SaveChanges();
 
-            return true;
+            return model;
         }
     }
 }

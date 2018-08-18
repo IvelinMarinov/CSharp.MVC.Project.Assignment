@@ -10,17 +10,19 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
     [Authorize(Roles = "Admin, Moderator")]
     public class MoviesController : BaseController
     {
-        private readonly IModeratorMovieService _moderatorMovieService;
+        private readonly IModeratorMovieService moderatorMovieService;
+        private readonly IModeratorGenreService genreService;
+        private readonly IModeratorPersonService personService;
 
         public MoviesController(IModeratorMovieService moderatorMovieService)
         {
-            this._moderatorMovieService = moderatorMovieService;
+            this.moderatorMovieService = moderatorMovieService;
         }
 
         [HttpGet]
         public IActionResult All()
         {
-            var movies = this._moderatorMovieService.GetAllMovies();
+            var movies = this.moderatorMovieService.GetAllMovies();
 
             return View(movies);
         }
@@ -28,6 +30,15 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            var allGenres = this.genreService.GetAllGenres();
+            var allPeople = this.personService.GetAllPeople();
+
+            var model = new MovieBindingModel
+            {
+                AllGenres = allGenres,
+                AllPeople = allPeople
+            };
+
             return View();
         }
 

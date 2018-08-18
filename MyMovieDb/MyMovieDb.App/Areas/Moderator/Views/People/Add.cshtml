@@ -19,6 +19,8 @@
         <div class="col-sm-6">
             @Html.FormGroupFor(m => m.DateOfBirth)
             @Html.FormGroupFor(m => m.PlaceOfBirth)
+            
+            @Html.LabelFor(m => m.Gender)
             @Html.DropDownListFor(
                 m => m.Gender,
                 Html.GetEnumSelectList<Gender>(),
@@ -31,5 +33,6 @@
 
     <div class="col-sm-3">
         <button type="submit" class="btn btn-outline-success">Add</button>
+        <a asp-area="Moderator" asp-controller="People" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
     </div>
 </form>

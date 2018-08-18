@@ -3,13 +3,17 @@
 @model PersonBindingModel
 
 @{
-    ViewData["Title"] = "Edit Person";
+    ViewData["Title"] = "Delete Person";
 }
+@section Scripts {
+    <script src="~/js/disable-form.js"></script>
+}
+
 <br />
-<h4>Edit Person</h4>
+<h4>Delete Person</h4>
 <hr />
 <div asp-validation-summary="All" class="text-danger"></div>
-<form method="post" asp-area="Moderator" asp-controller="People" asp-action="Edit">
+<form method="post" asp-area="Moderator" asp-controller="People" asp-action="Delete">
     @Html.HiddenFor(m => m.Id)
     <div class="row">
         <div class="col-sm-6">
@@ -20,7 +24,7 @@
         <div class="col-sm-6">
             @Html.FormGroupFor(m => m.DateOfBirth)
             @Html.FormGroupFor(m => m.PlaceOfBirth)
-            
+
             @Html.LabelFor(m => m.Gender)
             @Html.DropDownListFor(
                 m => m.Gender,
@@ -33,7 +37,7 @@
     @Html.FormGroupFor(m => m.PhotoImageUrl)
 
     <div class="col-sm-3">
-        <button type="submit" class="btn btn-outline-success">Edit</button>
-        <a asp-area="Moderator" asp-controller="People" asp-action="All" class="btn btn-outline-danger">Cancel</a>
+        <button type="submit" class="btn btn-outline-danger">Delete</button>
+        <a asp-area="Moderator" asp-controller="People" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
     </div>
 </form>

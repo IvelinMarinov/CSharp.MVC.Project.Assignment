@@ -11,6 +11,7 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
     {
         [HttpGet]
         public IActionResult Index()
+
         {
             return this.View();
         }

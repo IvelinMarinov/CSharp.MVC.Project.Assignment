@@ -1,0 +1,40 @@
+﻿@model ICollection<GenreViewModel>
+@{
+    ViewData["Title"] = "All Genres";
+}
+
+@section Scripts {
+    <script src="~/js/delete-modal.js"></script>
+}
+
+<h2>All Genres</h2>
+
+<div class="row">
+    <a asp-area="Moderator" asp-controller="Genres" asp-action="Add" class="btn btn-outline-secondary btn-lg">Add new genre</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var genre in Model)
+            {
+                <tr>
+                    <td id="item-description">@genre.Description</td>
+                    <td>
+                        <a asp-area="Moderator" asp-controller="Genres" asp-action="Edit" asp-route-id="@genre.Id" class="btn btn-outline-info">Edit</a>
+                    </td>
+                    <td>
+                        <a id="deleteBtn-@genre.Id" class="btn btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @Html.Partial("_ConfirmDeleteModal")
+</div>

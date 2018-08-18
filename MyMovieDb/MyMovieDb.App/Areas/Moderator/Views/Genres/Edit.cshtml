@@ -1,0 +1,23 @@
+﻿@using Helpers
+@model GenreBindingModel
+@{
+    ViewData["Title"] = "Edit Genre";
+}
+
+<br />
+<h4>Edit Genre</h4>
+<hr />
+<div asp-validation-summary="All" class="text-danger"></div>
+<form method="post" asp-area="Moderator" asp-controller="Genres" asp-action="Edit">
+    <div class="row">
+        @Html.FormGroupFor(m => m.Description)
+    </div>
+
+    <div class="col-sm-3">
+        <button type="submit" class="btn btn-outline-success">Edit</button>
+        <a asp-area="Moderator" asp-controller="Genres" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+</form>
+
+
+

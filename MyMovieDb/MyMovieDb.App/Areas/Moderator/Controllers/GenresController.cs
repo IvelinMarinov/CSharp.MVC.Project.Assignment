@@ -9,95 +9,87 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
 {
     [Area("Moderator")]
     [Authorize(Roles = "Admin, Moderator")]
-    public class PeopleController : BaseController
+    public class GenresController : BaseController
     {
-        private IModeratorPersonService personService;
+        private readonly IModeratorGenreService genreServices;
 
-        public PeopleController(IModeratorPersonService personService)
+        public GenresController(IModeratorGenreService genreServices)
         {
-            this.personService = personService;
+            this.genreServices = genreServices;
         }
 
         [HttpGet]
         public IActionResult All()
         {
-            var people = this.personService.GetAllPeople();
+            var genres = this.genreServices.GetAllGenres();
 
-            return View(people);
+            var x = TempData;
+
+            return this.View(genres);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            return this.View();
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Add(PersonBindingModel model)
+        public IActionResult Add(GenreBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-            var result = this.personService.AddPerson(model);
+            var result = this.genreServices.Add(model);
             if (result.HasError)
             {
                 SetMessage(MessageType.Danger, result.Message);
                 return this.View(model);
             }
 
-            SetMessage(MessageType.Success, $"{model.FirstName} {model.LastName} added successfully");
+            SetMessage(MessageType.Success, $"Genre {model.Description} added successfully");
             return this.RedirectToAction("All");
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var model = this.personService.GetPersonById(id);
+            var model = this.genreServices.GetGenreById(id);
 
             return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(PersonBindingModel model)
+        public IActionResult Edit(GenreBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-            var result = this.personService.EditPerson(model);
+            var result = this.genreServices.EditGenre(model);
             if (result.HasError)
             {
                 SetMessage(MessageType.Danger, result.Message);
                 return this.View(result);
             }
 
-            SetMessage(MessageType.Success, $"{model.FirstName} {model.LastName} edited successfully");
+            SetMessage(MessageType.Success, $"Genre {model.Description} edited successfully");
             return this.RedirectToAction("All");
         }
-
-        //[HttpGet]
-        //public IActionResult Delete(int id)
-        //{
-        //    var model = this.personService.GetPersonById(id);
-
-        //    return this.View(model);
-        //}
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            var result = this.personService.DeletePerson(id);
-
+            var result = this.genreServices.DeleteGenre(id);
             if (result.HasError)
             {
-                SetMessage(MessageType.Success, "Internal Server Error");
-                return this.RedirectToAction("All");
+                SetMessage(MessageType.Danger, result.Message);
             }
 
-            SetMessage(MessageType.Success, $"{result.FirstName} {result.LastName} deleted successfully");
+            SetMessage(MessageType.Success, $"Genre {result.Description} deleted successfully");
             return this.RedirectToAction("All");
         }
     }

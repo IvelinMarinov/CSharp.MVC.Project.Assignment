@@ -6,14 +6,14 @@ namespace MyMovieDb.Services.Moderator.Interfaces
 {
     public interface IModeratorPersonService
     {
-        ICollection<PersonShortListViewModel> GetAllPeople();
+        ICollection<PersonShortViewModel> GetAllPeople();
 
         PersonBindingModel AddPerson(PersonBindingModel model);
 
-        PersonBindingModel GetPersonForEditing(int id);
+        PersonBindingModel GetPersonById(int id);
 
         PersonBindingModel EditPerson(PersonBindingModel model);
 
-        bool DeletePerson(int id);
+        PersonBindingModel DeletePerson(int id);
     }
 }

@@ -80,8 +80,13 @@ namespace MyMovieDb.App
             services.AddScoped<IAdminUsersService, AdminUsersService>();
             services.AddScoped<IModeratorMovieService, ModeratorMovieService>();
             services.AddScoped<IModeratorPersonService, ModeratorPersonService>();
+            services.AddScoped<IModeratorGenreService, ModeratorGenreService>();
             
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddSessionStateTempDataProvider();
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,10 +105,11 @@ namespace MyMovieDb.App
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-
             app.UseAuthentication();
+            app.UseStaticFiles();
+
+            app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

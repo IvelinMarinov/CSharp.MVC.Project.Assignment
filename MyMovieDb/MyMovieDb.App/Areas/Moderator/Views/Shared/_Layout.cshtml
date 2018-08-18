@@ -20,12 +20,12 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Moderation Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -40,6 +40,8 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a asp-area="Moderator" asp-controller="Movies" asp-action="All" class="dropdown-item">Movies</a>
                     <a asp-area="Moderator" asp-controller="People" asp-action="All" class="dropdown-item">People</a>
+                    <a asp-area="Moderator" asp-controller="Genres" asp-action="All" class="dropdown-item">Genres</a>
+
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
@@ -53,17 +55,19 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
-</nav>
-
+</nav> 
+    
 <partial name="_CookieConsentPartial"/>
-
+    
 @if (TempData.ContainsKey(Constants.MessageText) && TempData.ContainsKey(Constants.MessageType))
 {
-    <div class="col-sm-offset-3 col-sm-6 message-container">
+    <div class="col-sm-6 message-container">
         <message type="@TempData[Constants.MessageType]" message="@TempData[Constants.MessageText]"></message>
     </div>
 }
 
+@*<partial name="_CookieConsentPartial"/>*@
+    
 <div class="container body-content">
     @RenderBody()
     <hr/>
