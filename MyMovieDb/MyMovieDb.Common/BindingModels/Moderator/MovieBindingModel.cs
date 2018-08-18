@@ -25,7 +25,7 @@ namespace MyMovieDb.Common.BindingModels.Moderator
         public string Title { get; set; }
 
         [Display(Name = "Plot")]
-        [StringLength(1024)]
+        [StringLength(4096)]
         [DataType(DataType.MultilineText)]
         [Required]
         public string Description { get; set; }
@@ -38,9 +38,9 @@ namespace MyMovieDb.Common.BindingModels.Moderator
         [DataType(DataType.ImageUrl)]
         public string CoverImageUrl { get; set; }
 
-        [Display(Name = "Trailer Video URL")]
-        [Url]
-        public string TrailerVideoUrl { get; set; }
+        [Display(Name = "Trailer Youtube ID")]
+        [StringLength(11)]
+        public string TrailerYoutubeId { get; set; }
 
         [Display(Name = "Premiere Date")]
         [DataType(DataType.Date)]

@@ -35,7 +35,7 @@
         <div class="col-sm-6">
             @Html.FormGroupFor(m => m.Title)
             @Html.FormGroupFor(m => m.CoverImageUrl)
-            @Html.FormGroupFor(m => m.TrailerVideoUrl)
+            @Html.FormGroupFor(m => m.TrailerYoutubeId)
         </div>
         <div class="col-sm-6">
             @Html.FormGroupFor(m => m.DurationInMinutes)
@@ -53,6 +53,7 @@
         <div class="col-sm-12">
             @Html.LabelFor(m => m.Description)
             @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 8 })
+            @Html.ValidationMessageFor(m  => m.Description, null, new { @class = "text-danger" })
         </div>
 
 

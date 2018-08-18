@@ -31,7 +31,7 @@ namespace MyMovieDb.Common.BindingModels.Moderator
         [Required]
         public Gender Gender { get; set; }
 
-        [StringLength(1024)]
+        [StringLength(4096)]
         [DataType(DataType.MultilineText)]
         [Required]
         public string Biography { get; set; }

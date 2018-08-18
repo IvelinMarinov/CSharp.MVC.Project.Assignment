@@ -18,7 +18,6 @@ namespace MyMovieDb.Models
         [Key]
         public int Id { get; set; }
 
-        [StringLength(1024)]
         [Required]
         public string Biography { get; set; }
 

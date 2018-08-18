@@ -23,7 +23,6 @@ namespace MyMovieDb.Models
         [Required]
         public string Title { get; set; }
 
-        [StringLength(1024)]
         [Required]
         public string Description { get; set; }
         
@@ -33,8 +32,8 @@ namespace MyMovieDb.Models
         [DataType(DataType.ImageUrl)]
         public string CoverImageUrl { get; set; }
 
-        [Url]
-        public string TrailerVideoUrl { get; set; }
+        [StringLength(11)]
+        public string TrailerYoutubeId { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime PremiereDate { get; set; }
