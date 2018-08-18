@@ -19,17 +19,21 @@
         <div class="col-sm-6">
             @Html.FormGroupFor(m => m.DateOfBirth)
             @Html.FormGroupFor(m => m.PlaceOfBirth)
-            
+
             @Html.LabelFor(m => m.Gender)
             @Html.DropDownListFor(
                 m => m.Gender,
                 Html.GetEnumSelectList<Gender>(),
                 "",
                 new { @class = "form-control" })
+            <br/>
         </div>
     </div>
-        @Html.FormGroupFor(m => m.Biography)
-        @Html.FormGroupFor(m => m.PhotoImageUrl)
+    @Html.LabelFor(m => m.Biography)
+    @Html.TextAreaFor(m => m.Biography, new { @class = "form-control", rows = 8 })
+    <br/>
+
+    @Html.FormGroupFor(m => m.PhotoImageUrl)
 
     <div class="col-sm-3">
         <button type="submit" class="btn btn-outline-success">Add</button>

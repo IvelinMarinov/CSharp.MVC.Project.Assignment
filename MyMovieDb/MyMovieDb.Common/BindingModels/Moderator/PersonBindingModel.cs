@@ -36,6 +36,7 @@ namespace MyMovieDb.Common.BindingModels.Moderator
         [Required]
         public string Biography { get; set; }
 
+        [Display(Name = "Photo Image URL")]
         [DataType(DataType.ImageUrl)]
         public string PhotoImageUrl { get; set; }
     }

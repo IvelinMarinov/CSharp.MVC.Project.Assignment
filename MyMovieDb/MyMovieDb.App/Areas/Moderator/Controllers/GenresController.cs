@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyMovieDb.App.Controllers;
 using MyMovieDb.App.Helpers.Messages;
@@ -21,10 +22,10 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         [HttpGet]
         public IActionResult All()
         {
-            var genres = this.genreServices.GetAllGenres();
-
-            var x = TempData;
-
+            var genres = this.genreServices.GetAllGenres()
+                .OrderBy(g => g.Description)
+                .ToList();
+            
             return this.View(genres);
         }
 

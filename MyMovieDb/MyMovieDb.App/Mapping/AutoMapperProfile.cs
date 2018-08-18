@@ -19,6 +19,14 @@ namespace MyMovieDb.App.Mapping
             CreateMap<Genre, GenreViewModel>();
             CreateMap<Genre, GenreBindingModel>();
             CreateMap<GenreBindingModel, Genre>();
+
+            CreateMap<MovieBindingModel, Movie>()
+                .ForMember(src => src.Genres, opts => opts.Ignore())
+                .ForMember(src => src.Actors, opts => opts.Ignore())
+                .ForMember(src => src.Directors, opts => opts.Ignore())
+                .ForMember(src => src.Producers, opts => opts.Ignore())
+                .ForMember(src => src.ScriptWriters, opts => opts.Ignore());
+
         }
     }
 }

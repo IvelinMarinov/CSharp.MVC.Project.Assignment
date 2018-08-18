@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyMovieDb.App.Controllers;
 using MyMovieDb.App.Helpers.Messages;
@@ -21,7 +22,9 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         [HttpGet]
         public IActionResult All()
         {
-            var people = this.personService.GetAllPeople();
+            var people = this.personService.GetAllPeople()
+                .OrderBy(p => p.FullName)
+                .ToList();
 
             return View(people);
         }

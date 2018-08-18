@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyMovieDb.App.Controllers;
 using MyMovieDb.Common.BindingModels.Moderator;
@@ -10,19 +11,26 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
     [Authorize(Roles = "Admin, Moderator")]
     public class MoviesController : BaseController
     {
-        private readonly IModeratorMovieService moderatorMovieService;
+        private readonly IModeratorMovieService movieService;
         private readonly IModeratorGenreService genreService;
         private readonly IModeratorPersonService personService;
 
-        public MoviesController(IModeratorMovieService moderatorMovieService)
+        public MoviesController(
+            IModeratorMovieService movieService,
+            IModeratorGenreService genreService,
+            IModeratorPersonService personService)
         {
-            this.moderatorMovieService = moderatorMovieService;
+            this.movieService = movieService;
+            this.genreService = genreService;
+            this.personService = personService;
         }
 
         [HttpGet]
         public IActionResult All()
         {
-            var movies = this.moderatorMovieService.GetAllMovies();
+            var movies = this.movieService.GetAllMovies()
+                .OrderBy(m => m.Title)
+                .ToList();
 
             return View(movies);
         }
@@ -39,12 +47,19 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
                 AllPeople = allPeople
             };
 
-            return View();
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult Add(MovieBindingModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var result = this.movieService.Add(model);
+
             return null;
         }
     }
