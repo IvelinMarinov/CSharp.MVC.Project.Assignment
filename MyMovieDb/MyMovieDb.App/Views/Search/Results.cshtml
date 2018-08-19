@@ -22,7 +22,7 @@
         {
             <li>
                 <img src="@(movie.CoverImageUrl ?? OtherConstants.NoImageAvailableRoute)" class="search-result" />
-                <a>@Html.Raw(movie.Title)</a>
+                <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">@Html.Raw(movie.Title)</a>
                 @movie.Note
             </li>
             <br />
@@ -39,7 +39,7 @@
         {
             <li>
                 <img src="@(person.PhotoImageUrl ?? OtherConstants.NoImageAvailableRoute)" class="search-result"/>
-                <a>@Html.Raw(person.Name)</a> @person.Note
+                <a asp-area="" asp-controller="People" asp-action="Details" asp-route-id="@person.Id">@Html.Raw(person.Name)</a> @person.Note
             </li>
             <br />
 

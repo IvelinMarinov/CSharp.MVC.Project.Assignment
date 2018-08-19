@@ -8,3 +8,7 @@ div.message-container {
 img.search-result {
     max-height: 60px;
 }
+
+img.details-image {
+    max-height: 100%;
+}

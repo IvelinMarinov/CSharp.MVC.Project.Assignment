@@ -1,0 +1,70 @@
+﻿@using MyMovieDb.App.Helpers
+@using MyMovieDb.Common.Constants
+@model PersonDetailsViewModel
+@{
+    ViewData["Title"] = "Person Details";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <img src="@(Model.PhotoImageUrl ?? OtherConstants.NoImageAvailableRoute)" alt="Person photo" class="details-image" />
+        </div>
+        <div class="col-sm-9">
+            <h1>@Model.FirstName @Model.LastName</h1>
+            @if (Model.Alias != null)
+            {
+                <h3>a.k.a @Model.Alias</h3>
+            }
+            <hr />
+            <p>@Model.Biography</p>
+
+            <p><strong>Born:</strong> @Model.DateOfBirth.ToString("dd-MM-yyyy") in @Model.PlaceOfBirth</p>
+        </div>
+    </div>
+    <br />
+    <h2>Filmography:</h2>
+    @if (Model.MoviesActedIn.Any())
+    {
+        <p>Actor (@Model.MoviesActedIn.Count credits)</p>
+        @Html.MoviesTableFor(m => m.MoviesActedIn, Model.MoviesActedIn)
+    }
+
+    @if (Model.MoviesDirected.Any())
+    {
+        <p>Director (@Model.MoviesDirected.Count credits)</p>
+        @Html.MoviesTableFor(m => m.MoviesDirected, Model.MoviesDirected)
+    }
+
+    @if (Model.MoviesProduced.Any())
+    {
+        <p>Producer (@Model.MoviesProduced.Count credits)</p>
+        @Html.MoviesTableFor(m => m.MoviesProduced, Model.MoviesProduced)
+    }
+
+    @if (Model.MoviesWroteScriptFor.Any())
+    {
+        <p>Writer (@Model.MoviesWroteScriptFor.Count credits)</p>
+        @Html.MoviesTableFor(m => m.MoviesWroteScriptFor, Model.MoviesWroteScriptFor)
+    }
+
+
+
+    @*<table class="table table-striped">
+            <thead>
+            </thead>
+            <tbody>
+            @foreach (var movie in Model.MoviesActedIn)
+            {
+                <tr>
+                    <td>
+                        <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">
+                            @movie.Title
+                        </a> @(movie.Status != "Completed" ? movie.Status : "")
+                    </td>
+                    <td>@(movie.Year != "1" ? movie.Year : "n/a")</td>
+                </tr>
+            }
+            </tbody>
+        </table>*@
+</div>

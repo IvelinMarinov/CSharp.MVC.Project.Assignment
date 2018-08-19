@@ -1,0 +1,57 @@
+﻿@using MyMovieDb.Common.Constants
+@model MovieDetailsViewModel
+@{
+    ViewData["Title"] = "Movie Details";
+}
+
+<div class="container-fluid">
+    <h1 class="text-center">@Model.Title</h1>
+    <h6 class="text-center">Duration: @Model.DurationInMinutes minutes | Genres: @string.Join(", ", Model.Genres) | Year: @(Model.PremiereDate.Year != 1 ? Model.PremiereDate.Year.ToString() : "n/a")</h6>
+    <hr />
+    <div class="row">
+        <div class="col-sm-3">
+            <img src="@(Model.CoverImageUrl ?? OtherConstants.NoImageAvailableRoute)" alt="Person photo" class="details-image" />
+        </div>
+        <div class="col-sm-9">
+            <p>@Model.Description</p>
+            <p>
+                Directors:
+                @foreach (var director in Model.Directors)
+                {
+                    <a asp-area="" asp-controller="People" asp-action="Details" asp-route-id="@director.Id">@director.Name</a>
+                }
+            </p>
+            <p>
+                Producers:
+                @foreach (var producer in Model.Producers)
+                {
+                    <a asp-area="" asp-controller="People" asp-action="Details" asp-route-id="@producer.Id">@producer.Name</a>
+                }
+            </p>
+            <p>
+                Writers:
+                @foreach (var writer in Model.ScriptWriters)
+                {
+                    <a asp-area="" asp-controller="People" asp-action="Details" asp-route-id="@writer.Id">@writer.Name</a>
+                }
+            </p>
+        </div>
+    </div>
+    <br />
+    <div class="col-sm-12 row">
+        <iframe width="1000" height="562" src="https://www.youtube.com/embed/@Model.TrailerYoutubeId" allowfullscreen></iframe>
+    </div>
+    <br />
+
+    <h2>Cast:</h2>
+    <hr />
+
+    @foreach (var actor in Model.Actors)
+    {
+        <div>
+            <img src="@(actor.PhotoImageUrl ?? OtherConstants.NoImageAvailableRoute)" class="search-result" />
+            <a asp-area="" asp-controller="People" asp-action="Details" asp-route-id="@actor.Id">@actor.Name</a>
+        </div>
+    }
+
+</div>
