@@ -6,21 +6,24 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
-            </li>
-        </ul>
-    </form>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hello @UserManager.GetUserName(User)!
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="dropdown-item">Account Settings</a>
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})" method="post" id="logoutForm">
+                <button type="submit" class="dropdown-item">Logout</button>
+            </form>
+        </div>
+
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-    </ul>
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Guest
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a asp-area="Identity" asp-page="/Account/Register" class="dropdown-item">Register</a>
+        <a asp-area="Identity" asp-page="/Account/Login" class="dropdown-item">Login</a>
+    </div>
 }
