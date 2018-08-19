@@ -1,6 +1,6 @@
 ﻿namespace MyMovieDb.Common.BindingModels.Moderator
 {
-    public class GenreBindingModel : BaseBindingModel
+    public class GenreBindingModel : BaseModel
     {
         public string Description { get; set; }
     }

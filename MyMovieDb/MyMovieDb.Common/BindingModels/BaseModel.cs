@@ -1,6 +1,6 @@
 ﻿namespace MyMovieDb.Common.BindingModels
 {
-    public abstract class BaseBindingModel
+    public abstract class BaseModel
     {
         public int? Id { get; set; }
 

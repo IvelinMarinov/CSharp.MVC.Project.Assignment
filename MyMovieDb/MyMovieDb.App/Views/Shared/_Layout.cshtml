@@ -27,8 +27,10 @@
 
         <div class="collapse navbar-collapse">
 
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form asp-area="" asp-controller="Search" asp-action="Results" method="post" class="form-inline my-2 my-lg-0">
+                @*<input name="searchString" class="form-control form-control-custom" type="text" placeholder="Search">*@
+
+                <input name="searchString" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
 

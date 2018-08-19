@@ -4,7 +4,7 @@ using MyMovieDb.Common.Enums;
 
 namespace MyMovieDb.Common.BindingModels.Moderator
 {
-    public class PersonBindingModel: BaseBindingModel
+    public class PersonBindingModel: BaseModel
     {
         [Display(Name = "First Name")]
         [StringLength(128)]

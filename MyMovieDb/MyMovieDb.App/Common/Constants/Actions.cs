@@ -1,6 +1,6 @@
 ﻿namespace MyMovieDb.App.Common.Constants
 {
-    public static class Actions
+    public static class ActionNames
     {
         //public const string 
     }

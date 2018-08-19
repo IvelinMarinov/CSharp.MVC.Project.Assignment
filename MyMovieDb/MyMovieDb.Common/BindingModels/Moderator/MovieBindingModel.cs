@@ -6,7 +6,7 @@ using MyMovieDb.Common.ViewModels.Moderator;
 
 namespace MyMovieDb.Common.BindingModels.Moderator
 {
-    public class MovieBindingModel : BaseBindingModel
+    public class MovieBindingModel : BaseModel
     {
         public MovieBindingModel()
         {

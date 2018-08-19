@@ -60,8 +60,14 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
             }
 
             var result = this.movieService.AddMovie(model);
+            if (result.HasError)
+            {
+                SetMessage(MessageType.Danger, result.Message);
+                return this.View(model);
+            }
 
-            return null;
+            SetMessage(MessageType.Success, $"{model.Title} added successfully");
+            return this.RedirectToAction("All");
         }
 
         [HttpGet]

@@ -1,0 +1,48 @@
+﻿@using MyMovieDb.Common.Constants
+@model SearchResultsViewModel
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<br />
+<h4>Results for <strong>"@Model.SearchString"</strong></h4>
+<hr />
+
+@if (!Model.MoviesFound.Any() && !Model.PeopleFound.Any())
+{
+    <p>Sorry, we were unable to find anything in our database, that matches your search</p>
+}
+
+
+@if (Model.MoviesFound.Any())
+{
+    <p>Titles: </p>
+    <ul>
+        @foreach (var movie in Model.MoviesFound)
+        {
+            <li>
+                <img src="@(movie.CoverImageUrl ?? OtherConstants.NoImageAvailableRoute)" class="search-result" />
+                <a>@Html.Raw(movie.Title)</a>
+                @movie.Note
+            </li>
+            <br />
+        }
+    </ul>
+}
+<br />
+
+@if (Model.PeopleFound.Any())
+{
+    <p>Names: </p>
+    <ul>
+        @foreach (var person in Model.PeopleFound)
+        {
+            <li>
+                <img src="@(person.PhotoImageUrl ?? OtherConstants.NoImageAvailableRoute)" class="search-result"/>
+                <a>@Html.Raw(person.Name)</a> @person.Note
+            </li>
+            <br />
+
+        }
+    </ul>
+}

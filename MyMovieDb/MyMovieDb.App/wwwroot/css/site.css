@@ -4,3 +4,7 @@ div.message-container {
     position: absolute;
     z-index: 100000;
 }
+
+img.search-result {
+    max-height: 60px;
+}

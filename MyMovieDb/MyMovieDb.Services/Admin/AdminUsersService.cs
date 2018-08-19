@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using MyMovieDb.Common.Constants;
 using MyMovieDb.Common.ViewModels.Admin;
 using MyMovieDb.Data;
-using MyMovieDb.Models;
 using MyMovieDb.Services.Admin.Interfaces;
 
 namespace MyMovieDb.Services.Admin
@@ -16,12 +15,12 @@ namespace MyMovieDb.Services.Admin
     public class AdminUsersService : BaseService, IAdminUsersService
     {
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<User> userManager;
+        private readonly UserManager<Models.User> userManager;
 
         public AdminUsersService(
             MyMovieDbContext dbContext,
             RoleManager<IdentityRole> roleManager,
-            UserManager<User> userManager,
+            UserManager<Models.User> userManager,
             IMapper mapper)
             : base(dbContext, mapper)
         {

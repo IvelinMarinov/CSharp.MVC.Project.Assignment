@@ -117,11 +117,16 @@ namespace MyMovieDb.Services.Moderator
        
             var writersToRemove = movieDb.ScriptWriters;
             var writersToKeep = model.SelectedScriptWriterIds.Select(id => new MovieScriptWriters { PersonId = id, MovieId = model.Id.Value });
-            
+
+            Mapper.Map(model, movieDb);
+
             try
             {
+                DbContext.Movies.Update(movieDb);
+
                 DbContext.MovieGenres.RemoveRange(genresToRemove);
                 DbContext.MovieGenres.AddRange(genresToKeep);
+
                 DbContext.MovieActors.RemoveRange(actorsToRemove);
                 DbContext.MovieActors.AddRange(actorsToKeep);
 
