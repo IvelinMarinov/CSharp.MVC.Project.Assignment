@@ -1,0 +1,30 @@
+﻿@model ICollection<TheaterProgramShortListViewModel>
+@{
+    ViewData["Title"] = "All Programs";
+}
+
+<div class="row">
+    <a asp-area="Moderator" asp-controller="TheaterProgram" asp-action="Add" class="btn btn-outline-secondary btn-lg">Add</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var program in Model)
+            {
+                <tr>
+                    <td>@program.DateFrom.ToString("dd/MM/yyyy")</td>
+                    <td>@program.DateTo.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a asp-area="Moderator" asp-controller="TheaterProgram" asp-action="Edit" asp-route-id="@program.Id" class="btn btn-outline-info">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

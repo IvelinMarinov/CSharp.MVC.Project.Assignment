@@ -29,7 +29,7 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         public IActionResult All()
         {
             var articles = this.articleService.GetAllArticles()
-                .OrderByDescending(g => g.Id)
+                .OrderByDescending(a => a.CreatedDate)
                 .ToList();
 
             return this.View(articles);

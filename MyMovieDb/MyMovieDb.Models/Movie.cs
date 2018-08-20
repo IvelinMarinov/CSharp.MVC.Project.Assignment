@@ -14,6 +14,7 @@ namespace MyMovieDb.Models
             this.Directors = new HashSet<MovieDirectors>();
             this.Producers = new HashSet<MovieProducers>();
             this.ScriptWriters = new HashSet<MovieScriptWriters>();
+            this.InTheater = new HashSet<MoviesInTheater>();
         }
 
         [Key]
@@ -53,5 +54,7 @@ namespace MyMovieDb.Models
         public ICollection<MovieProducers> Producers { get; set; }
 
         public ICollection<MovieScriptWriters> ScriptWriters { get; set; }
+
+        public ICollection<MoviesInTheater> InTheater { get; set; }
     }
 }

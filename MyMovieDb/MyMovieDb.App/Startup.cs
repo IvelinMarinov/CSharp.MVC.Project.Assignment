@@ -85,6 +85,7 @@ namespace MyMovieDb.App
             services.AddScoped<IModeratorPersonService, ModeratorPersonService>();
             services.AddScoped<IModeratorGenreService, ModeratorGenreService>();
             services.AddScoped<IModeratorArticleService, ModeratorArticleService>();
+            services.AddScoped<IModeratorTheaterProgramService, ModeratorTheaterProgramService>();
             services.AddScoped<IUserSearchService, UserSearchService>();
             services.AddScoped<IUserPeopleService, UserPeopleService>();
             services.AddScoped<IUserMovieService, UserMovieService>();

@@ -1,0 +1,48 @@
+﻿@model TheaterProgramBindingModel
+@using Helpers
+
+@{
+    ViewData["Title"] = "Edit Program";
+}
+
+@{
+    var moviesList = Model.AllMovies
+        .OrderBy(m => m.Title)
+        .Select(g => new SelectListItem
+        {
+            Text = g.Title,
+            Value = g.Id.ToString()
+        })
+        .ToList();
+}
+
+@section Scripts{
+    <script>
+        var selectedMoviesIdsStr = '@String.Join(" ", Model.SelectedMoviesIds)';
+    </script>
+    <script src="~/js/edit-theater-program.js"></script>
+}
+
+<br />
+<h4>Add Program</h4>
+<hr />
+<div asp-validation-summary="All" class="text-danger"></div>
+<form method="post" asp-area="Moderator" asp-controller="TheaterProgram" asp-action="Add">
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.FormGroupFor(m => m.DateFrom)
+        </div>
+        <div class="col-sm-6">
+            @Html.FormGroupFor(m => m.DateTo)
+        </div>
+
+        <div class="col-sm-12">
+            @Html.MultiselectDropDownListFor(m => m.SelectedMoviesIds, moviesList, "moviesDD")
+        </div>
+
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-outline-success">Edit</button>
+            <a asp-area="Moderator" asp-controller="TheaterProgram" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </div>
+</form>
