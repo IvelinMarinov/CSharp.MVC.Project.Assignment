@@ -20,7 +20,7 @@ namespace MyMovieDb.Data
         public DbSet<MovieProducers> MovieProducers { get; set; }
         public DbSet<MovieScriptWriters> MovieScriptWriters { get; set; }
         public DbSet<Person> People { get; set; }
-        //public DbSet<User> Users { get; set; }
+        public DbSet<Article> Articles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -28,6 +28,7 @@ namespace MyMovieDb.Data
             builder.ApplyConfiguration(new PersonConfiguration());
             builder.ApplyConfiguration(new GenreConfiguration());
             builder.ApplyConfiguration(new MovieGenresConfiguration());
+            builder.ApplyConfiguration(new ArticleConfiguration());
 
             base.OnModelCreating(builder);
         }
