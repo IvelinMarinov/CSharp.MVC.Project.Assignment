@@ -1,0 +1,34 @@
+﻿@model ArticleBindingModel
+@using Helpers
+
+@{
+    ViewData["Title"] = "Add Article";
+}
+
+<br />
+<h4>Add Article</h4>
+<hr />
+<div asp-validation-summary="All" class="text-danger"></div>
+<form method="post" asp-area="Moderator" asp-controller="Articles" asp-action="Add">
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.FormGroupFor(m => m.Title)
+        </div>
+    
+        <div class="col-sm-12">
+            @Html.LabelFor(m => m.Content)
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", rows = 8 })
+            @Html.ValidationMessageFor(m => m.Content, null, new { @class = "text-danger" })
+            <br/>
+        </div>   
+        
+        <div class="col-sm-12">
+            @Html.FormGroupFor(m => m.ImageUrl)
+        </div>
+
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-outline-success">Add</button>
+            <a asp-area="Moderator" asp-controller="Articles" asp-action="All" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </div>
+</form>

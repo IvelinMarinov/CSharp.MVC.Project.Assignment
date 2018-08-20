@@ -1,13 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyMovieDb.Models
+namespace MyMovieDb.Common.BindingModels.Moderator
 {
-    public class Article
+    public class ArticleBindingModel : BaseModel
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [StringLength(256)]
         public string Title { get; set; }
@@ -16,12 +13,10 @@ namespace MyMovieDb.Models
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
+        [Display(Name = "Image URL")]
         [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
 
-        public User Author { get; set; }
-
-        [Required]
         public string AuthorId { get; set; }
 
         public DateTime CreatedDate { get; set; }

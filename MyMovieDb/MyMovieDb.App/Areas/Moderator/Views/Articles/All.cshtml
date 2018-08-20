@@ -1,0 +1,50 @@
+﻿@model ICollection<ArticleShortListViewModel>
+@{
+    ViewData["Title"] = "All Articles";
+}
+
+@section Scripts {
+    <script src="~/js/delete-modal.js"></script>
+}
+
+<h2>All Articles</h2>
+
+<div class="row">
+    <a asp-area="Moderator" asp-controller="Articles" asp-action="Add" class="btn btn-outline-secondary btn-lg">Add</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Created on</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var article in Model)
+        {
+            <tr>
+                <td id="item-description">
+                    @article.Title
+                </td>
+                <td>
+                    @article.AuthorName
+                </td>
+                <td>
+                    @article.CreatedDate
+                </td>
+                <td>
+                    <a asp-area="Moderator" asp-controller="Articles" asp-action="Edit" asp-route-id="@article.Id" class="btn btn-outline-info">Edit</a>
+                </td>
+                <td>
+                    <a id="deleteBtn-@article.Id" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    @Html.Partial("_ConfirmDeleteModal")
+</div>
+

@@ -24,6 +24,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\UsersManage\" />
     <Folder Include="Areas\Moderator\Models\" />
+    <Folder Include="Views\Articles\" />
   </ItemGroup>
 
 </Project>
