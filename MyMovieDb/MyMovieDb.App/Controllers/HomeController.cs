@@ -1,14 +1,33 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MyMovieDb.App.Models;
+using MyMovieDb.Common.ViewModels.Users;
+using MyMovieDb.Services.Users.Interfaces;
 
 namespace MyMovieDb.App.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        private readonly IUserArticleService articleService;
+        private readonly IUserTheaterProgramService theaterProgramService;
+
+        public HomeController(
+            IUserArticleService articleService, 
+            IUserTheaterProgramService theaterProgramService)
+        {
+            this.articleService = articleService;
+            this.theaterProgramService = theaterProgramService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var model = new HomePageViewModel
+            {
+                Articles = this.articleService.GetLastTenArticles(),
+                NowPlaying = this.theaterProgramService.GetMoviewPlayingNow()
+            };
+
+            return View(model);
         }
 
         public IActionResult About()

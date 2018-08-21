@@ -89,6 +89,8 @@ namespace MyMovieDb.App
             services.AddScoped<IUserSearchService, UserSearchService>();
             services.AddScoped<IUserPeopleService, UserPeopleService>();
             services.AddScoped<IUserMovieService, UserMovieService>();
+            services.AddScoped<IUserArticleService, UserArticleService>();
+            services.AddScoped<IUserTheaterProgramService, UserTheaterProgramService>();
             
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)

@@ -1,5 +1,46 @@
-﻿@{
+﻿@model HomePageViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Index Page</h1>
+<br />
+<h4 class="text-center">New on My Movie DB</h4>
+<hr />
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+            @foreach (var article in Model.Articles)
+            {
+                <div>
+                    <h5>@article.Title</h5>
+                    <h6>Posted on @article.CreatedDate.ToString("dd/MM hh:mm") by @article.AuthorName</h6>
+                    @if (article.ImageUrl != null)
+                    {
+                        <img src="@article.ImageUrl" class="wrap" />
+                    }
+                    @if (article.Content.Length > 600)
+                    {
+                        <p>
+                            @article.Content.Substring(0, 600)&nbsp;
+                            <a asp-area="" asp-controller="Articles" asp-action="Details">Read more</a>
+                        </p>
+                    }
+                </div>
+                <hr />
+            }
+        </div>
+        <div class="col-sm-3">
+            Now playing in theaters:
+            <hr />
+            <ul>
+                @foreach (var movie in Model.NowPlaying.Movies)
+                {
+                    <li>
+                        <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">@movie.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

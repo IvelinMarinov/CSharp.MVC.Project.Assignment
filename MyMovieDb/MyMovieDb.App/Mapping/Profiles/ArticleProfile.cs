@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MyMovieDb.Common.BindingModels.Moderator;
 using MyMovieDb.Common.ViewModels.Moderator;
+using MyMovieDb.Common.ViewModels.Users;
 using MyMovieDb.Models;
 
 namespace MyMovieDb.App.Mapping.Profiles
@@ -16,6 +17,9 @@ namespace MyMovieDb.App.Mapping.Profiles
             CreateMap<ArticleBindingModel, Article>();
             CreateMap<Article, ArticleBindingModel>();
 
+            CreateMap<Article, ArticleViewModel>()
+                .ForMember(dest => dest.AuthorName,
+                    opts => opts.MapFrom(src => $"{src.Author.FirstName} {src.Author.LastName}"));
         }
     }
 }

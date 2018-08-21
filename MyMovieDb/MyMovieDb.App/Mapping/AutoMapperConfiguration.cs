@@ -13,6 +13,8 @@ namespace MyMovieDb.App.Mapping
                 cfg.AddProfile(new MovieProfile());
                 cfg.AddProfile(new PersonProfile());
                 cfg.AddProfile(new GenreProfile());
+                cfg.AddProfile(new ArticleProfile());
+                cfg.AddProfile(new TheaterProgramProfile());
             });
         }
     }
