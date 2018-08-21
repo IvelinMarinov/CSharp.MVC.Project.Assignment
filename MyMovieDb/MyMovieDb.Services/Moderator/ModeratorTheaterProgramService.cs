@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MyMovieDb.Common.BindingModels.Moderator;
 using MyMovieDb.Common.ViewModels.Moderator;
 using MyMovieDb.Data;
@@ -11,7 +12,7 @@ namespace MyMovieDb.Services.Moderator
 {
     public class ModeratorTheaterProgramService : BaseService, IModeratorTheaterProgramService
     {
-        public ModeratorTheaterProgramService(MyMovieDbContext dbContext, IMapper mapper) 
+        public ModeratorTheaterProgramService(MyMovieDbContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
         {
         }
@@ -48,7 +49,10 @@ namespace MyMovieDb.Services.Moderator
         public TheaterProgramBindingModel GetById(int id)
         {
             var model = new TheaterProgramBindingModel();
-            var programDb = DbContext.TheaterProgram.Find(id);
+            var programDb = DbContext.TheaterProgram
+                .Include(p => p.Movies)
+                .FirstOrDefault(p => p.Id == id);
+
             if (programDb == null)
             {
                 model.SetError("Theater program not found in database");
@@ -71,6 +75,18 @@ namespace MyMovieDb.Services.Moderator
 
             Mapper.Map(model, programDb);
 
+            var moviesInTheaterToDelete = DbContext.MoviesInTheaters
+                .Where(mt => mt.TheaterProgramId == model.Id);
+
+            var moviesInTheaterToKeep = model.SelectedMoviesIds
+                .Select(movieId => new MoviesInTheater
+                {
+                    MovieId = movieId,
+                    TheaterProgramId = model.Id.Value
+                }).ToList();
+
+            DbContext.RemoveRange(moviesInTheaterToDelete);
+            DbContext.AddRange(moviesInTheaterToKeep);
             DbContext.TheaterProgram.Update(programDb);
             DbContext.SaveChanges();
 

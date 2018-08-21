@@ -67,6 +67,7 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         public IActionResult Edit(int id)
         {
             var model = this.programService.GetById(id);
+            model.AllMovies = this.movieService.GetAllMovies();
 
             return this.View(model);
         }

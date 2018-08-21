@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    var selectedGenresIds = selectedGenresIdsStr.split(' ');
+    var selectedGenresIds = selectedMoviesIdsStr.split(' ');
 
     $('select[id=moviesDD]').val(selectedGenresIds);
 
