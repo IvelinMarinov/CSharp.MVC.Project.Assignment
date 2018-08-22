@@ -8,7 +8,9 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="log4net.Extensions.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
     <PackageReference Include="Sendgrid" Version="9.9.0" />
   </ItemGroup>
@@ -24,6 +26,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\UsersManage\" />
     <Folder Include="Areas\Moderator\Models\" />
+    <Folder Include="NewFolder\" />
     <Folder Include="Views\Articles\" />
   </ItemGroup>
 

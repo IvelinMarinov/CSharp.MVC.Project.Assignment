@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MyMovieDb.App.Areas.Identity.Services;
 using MyMovieDb.App.Common;
+using MyMovieDb.App.Filters;
 using MyMovieDb.Data;
 using MyMovieDb.Models;
 using MyMovieDb.Services.Admin;
@@ -92,7 +94,10 @@ namespace MyMovieDb.App
             services.AddScoped<IUserArticleService, UserArticleService>();
             services.AddScoped<IUserTheaterProgramService, UserTheaterProgramService>();
             
-            services.AddMvc()
+            services.AddMvc(options =>
+                {
+                    options.Filters.Add(typeof(GlobalExceptionFilter));
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddSessionStateTempDataProvider();
 
@@ -100,7 +105,7 @@ namespace MyMovieDb.App
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -113,6 +118,8 @@ namespace MyMovieDb.App
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            loggerFactory.AddLog4Net("log4net.config");
 
             app.UseHttpsRedirection();
             app.UseAuthentication();

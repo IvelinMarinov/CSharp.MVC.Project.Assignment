@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using log4net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyMovieDb.Common.BindingModels.Moderator;
 using MyMovieDb.Services.Users.Interfaces;

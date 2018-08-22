@@ -1,6 +1,9 @@
 ﻿using System.Linq;
+using log4net;
+using log4net.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyMovieDb.App.Attributes;
 using MyMovieDb.App.Controllers;
 using MyMovieDb.App.Helpers.Messages;
 using MyMovieDb.Common.BindingModels.Moderator;
@@ -15,6 +18,8 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         private readonly IModeratorMovieService movieService;
         private readonly IModeratorGenreService genreService;
         private readonly IModeratorPersonService personService;
+        private readonly ILog logger;
+
 
         public MoviesController(
             IModeratorMovieService movieService,
@@ -24,6 +29,7 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
             this.movieService = movieService;
             this.genreService = genreService;
             this.personService = personService;
+            this.logger = LogManager.GetLogger(typeof(ILog));
         }
 
         [HttpGet]
@@ -37,6 +43,7 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         }
 
         [HttpGet]
+        [Trace]
         public IActionResult Add()
         {
             var allGenres = this.genreService.GetAllGenres();
@@ -52,6 +59,7 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         }
 
         [HttpPost]
+        [ModeratorLog]
         public IActionResult Add(MovieBindingModel model)
         {
             if (!ModelState.IsValid)
