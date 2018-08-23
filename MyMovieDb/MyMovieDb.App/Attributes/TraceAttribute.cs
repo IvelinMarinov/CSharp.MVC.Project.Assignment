@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Text;
 using log4net;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
-using MyMovieDb.Models;
 
 namespace MyMovieDb.App.Attributes
 {

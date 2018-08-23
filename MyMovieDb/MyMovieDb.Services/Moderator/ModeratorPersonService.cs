@@ -38,6 +38,7 @@ namespace MyMovieDb.Services.Moderator
                 DbContext.People.Add(person);
                 DbContext.SaveChanges();
 
+                Mapper.Map(person, model);
                 return model;
             }
             catch (Exception e)
@@ -80,6 +81,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.People.Update(person);
             DbContext.SaveChanges();
 
+            Mapper.Map(person, model);
             return model;
         }
 
@@ -97,6 +99,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.People.Remove(person);
             DbContext.SaveChanges();
 
+            Mapper.Map(person, model);
             return model;
         }
     }

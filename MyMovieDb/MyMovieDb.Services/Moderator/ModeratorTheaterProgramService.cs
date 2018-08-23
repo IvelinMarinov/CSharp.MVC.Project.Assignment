@@ -43,6 +43,7 @@ namespace MyMovieDb.Services.Moderator
             }
             DbContext.SaveChanges();
 
+            Mapper.Map(program, model);
             return model;
         }
 
@@ -90,6 +91,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.TheaterProgram.Update(programDb);
             DbContext.SaveChanges();
 
+            Mapper.Map(programDb, model);
             return model;
         }
     }

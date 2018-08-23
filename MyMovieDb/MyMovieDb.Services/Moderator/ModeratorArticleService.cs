@@ -35,6 +35,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.Articles.Add(article);
             DbContext.SaveChanges();
 
+            Mapper.Map(article, model);
             return model;
         }
 
@@ -67,6 +68,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.Articles.Update(articleDb);
             DbContext.SaveChanges();
 
+            Mapper.Map(articleDb, model);
             return model;
         }
 
@@ -84,6 +86,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.Articles.Remove(articleDb);
             DbContext.SaveChanges();
 
+            Mapper.Map(articleDb, model);
             return model;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyMovieDb.App.Controllers;
 using MyMovieDb.App.Helpers.Messages;
@@ -10,11 +11,14 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
 {
     [Area("Moderator")]
     [Authorize(Roles = "Admin, Moderator")]
-    public class PeopleController : BaseController
+    public class PeopleController : BaseModeratorController
     {
         private IModeratorPersonService personService;
 
-        public PeopleController(IModeratorPersonService personService)
+        public PeopleController(
+            IModeratorPersonService personService, 
+            IHttpContextAccessor contextAccessor)
+            : base(contextAccessor)
         {
             this.personService = personService;
         }
@@ -44,6 +48,8 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
             }
 
             var result = this.personService.AddPerson(model);
+            LogResult(result);
+
             if (result.HasError)
             {
                 SetMessage(MessageType.Danger, result.Message);
@@ -71,6 +77,8 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
             }
 
             var result = this.personService.EditPerson(model);
+            LogResult(result);
+
             if (result.HasError)
             {
                 SetMessage(MessageType.Danger, result.Message);
@@ -81,18 +89,11 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
             return this.RedirectToAction("All");
         }
 
-        //[HttpGet]
-        //public IActionResult Delete(int id)
-        //{
-        //    var model = this.personService.GetPersonById(id);
-
-        //    return this.View(model);
-        //}
-
         [HttpPost]
         public IActionResult Delete(int id)
         {
             var result = this.personService.DeletePerson(id);
+            LogResult(result);
 
             if (result.HasError)
             {

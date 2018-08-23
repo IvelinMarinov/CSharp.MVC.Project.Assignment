@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyMovieDb.App.Controllers;
@@ -14,12 +15,16 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
 {
     [Area("Moderator")]
     [Authorize(Roles = "Admin, Moderator")]
-    public class ArticlesController : BaseController
+    public class ArticlesController : BaseModeratorController
     {
         private readonly IModeratorArticleService articleService;
         private readonly UserManager<User> userManager; 
 
-        public ArticlesController(IModeratorArticleService articleService, UserManager<User> userManager)
+        public ArticlesController(
+            IModeratorArticleService articleService, 
+            UserManager<User> userManager,
+            IHttpContextAccessor contextAccessor)
+            : base(contextAccessor)
         {
             this.articleService = articleService;
             this.userManager = userManager;
@@ -53,6 +58,8 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
             model.CreatedDate = DateTime.Now;
 
             var result = this.articleService.AddArticle(model);
+            LogResult(result);
+
             if (result.HasError)
             {
                 SetMessage(MessageType.Danger, result.Message);
@@ -80,6 +87,8 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
             }
 
             var result = this.articleService.EditArticle(model);
+            LogResult(result);
+
             if (result.HasError)
             {
                 SetMessage(MessageType.Danger, result.Message);
@@ -94,6 +103,8 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         public IActionResult Delete(int id)
         {
             var result = this.articleService.DeleteArticle(id);
+            LogResult(result);
+
             if (result.HasError)
             {
                 SetMessage(MessageType.Danger, result.Message);

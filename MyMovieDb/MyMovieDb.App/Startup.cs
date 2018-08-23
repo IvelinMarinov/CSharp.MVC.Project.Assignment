@@ -77,6 +77,8 @@ namespace MyMovieDb.App
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
             });
 
+            services.AddHttpContextAccessor();
+
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
             services.Configure<SendGridOptions>(this.Configuration.GetSection("EmailSettings"));
 

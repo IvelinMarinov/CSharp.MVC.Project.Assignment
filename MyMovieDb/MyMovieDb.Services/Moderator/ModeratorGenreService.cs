@@ -37,6 +37,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.Genres.Add(genre);
             DbContext.SaveChanges();
 
+            Mapper.Map(genre, model);
             return model;
         }
 
@@ -69,6 +70,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.Genres.Update(genre);
             DbContext.SaveChanges();
 
+            Mapper.Map(genre, model);
             return model;
         }
 
@@ -86,6 +88,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.Genres.Remove(genre);
             DbContext.SaveChanges();
 
+            Mapper.Map(genre, model);
             return model;
         }
     }

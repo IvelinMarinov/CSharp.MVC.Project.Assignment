@@ -62,6 +62,7 @@ namespace MyMovieDb.Services.Moderator
                 return model;
             }
 
+            Mapper.Map(movie, model);
             return model;
         }
 
@@ -147,6 +148,7 @@ namespace MyMovieDb.Services.Moderator
                 return model;
             }
 
+            Mapper.Map(movieDb, model);
             return model;
         }
 
@@ -164,6 +166,7 @@ namespace MyMovieDb.Services.Moderator
             DbContext.Movies.Remove(movie);
             DbContext.SaveChanges();
 
+            Mapper.Map(movie, model);
             return model;
         }
 

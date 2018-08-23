@@ -1,7 +1,9 @@
 ﻿using System.Linq;
+using System.Security.Claims;
 using log4net;
 using log4net.Core;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyMovieDb.App.Attributes;
 using MyMovieDb.App.Controllers;
@@ -13,23 +15,24 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
 {
     [Area("Moderator")]
     [Authorize(Roles = "Admin, Moderator")]
-    public class MoviesController : BaseController
+    public class MoviesController : BaseModeratorController
     {
         private readonly IModeratorMovieService movieService;
         private readonly IModeratorGenreService genreService;
         private readonly IModeratorPersonService personService;
-        private readonly ILog logger;
+        private string username;
 
 
         public MoviesController(
             IModeratorMovieService movieService,
             IModeratorGenreService genreService,
-            IModeratorPersonService personService)
+            IModeratorPersonService personService,
+            IHttpContextAccessor contextAccessor)
+            : base(contextAccessor)
         {
             this.movieService = movieService;
             this.genreService = genreService;
             this.personService = personService;
-            this.logger = LogManager.GetLogger(typeof(ILog));
         }
 
         [HttpGet]
@@ -68,6 +71,8 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
             }
 
             var result = this.movieService.AddMovie(model);
+            this.LogResult(model);
+
             if (result.HasError)
             {
                 SetMessage(MessageType.Danger, result.Message);
@@ -97,6 +102,8 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
             }
 
             var result = this.movieService.EditMovie(model);
+            this.LogResult(model);
+
             if (result.HasError)
             {
                 SetMessage(MessageType.Danger, result.Message);
@@ -111,6 +118,7 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
         public IActionResult Delete(int id)
         {
             var result = this.movieService.DeleteMovie(id);
+            this.LogResult(result);
 
             if (result.HasError)
             {
