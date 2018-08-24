@@ -33,6 +33,10 @@ namespace MyMovieDb.Data.EntityConfigurations
             builder.HasMany(m => m.InTheater)
                 .WithOne(mt => mt.Movie)
                 .HasForeignKey(mt => mt.MovieId);
+
+            builder.HasMany(m => m.MovieVotes)
+                .WithOne(mv => mv.Movie)
+                .HasForeignKey(mv => mv.MovieId);
         }
     }
 }

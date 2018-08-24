@@ -26,6 +26,8 @@ namespace MyMovieDb.Models
 
         public ICollection<Article> Articles { get; set; }
 
+        public ICollection<MovieVotes> MovieVotes { get; set; }
+
         //TO DO add avatar
     }
 }

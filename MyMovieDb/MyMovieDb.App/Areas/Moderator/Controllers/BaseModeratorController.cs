@@ -29,8 +29,8 @@ namespace MyMovieDb.App.Areas.Moderator.Controllers
                 .ToString()
                 .Split('/');
 
-            var action = urlArgs.Last().ToLower().TrimEnd('e');
-            var entity = urlArgs[urlArgs.Length - 2].TrimEnd('s');
+            var action = urlArgs[3].ToLower().TrimEnd('e');
+            var entity = urlArgs[2].TrimEnd('s');
 
             if (!model.HasError)
             {
