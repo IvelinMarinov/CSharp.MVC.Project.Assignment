@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MyMovieDb.Common.ViewModels.Users;
 using MyMovieDb.Data;
+using MyMovieDb.Models;
 using MyMovieDb.Services.Users.Interfaces;
 
 namespace MyMovieDb.Services.Users
@@ -24,6 +25,7 @@ namespace MyMovieDb.Services.Users
                 .Include(m => m.Directors).ThenInclude(md => md.Person)
                 .Include(m => m.Producers).ThenInclude(mp => mp.Person)
                 .Include(m => m.ScriptWriters).ThenInclude(mw => mw.Person)
+                .Include(m => m.MovieVotes)
                 .FirstOrDefault(p => p.Id == id);
 
             if (movieDb == null)
@@ -34,6 +36,39 @@ namespace MyMovieDb.Services.Users
 
             model = Mapper.Map<MovieDetailsViewModel>(movieDb);
             return model;
+        }
+
+        public MovieVoteBindingModel AddEditMovieVote(MovieVoteBindingModel model)
+        {
+            var existingVote = DbContext.MovieVotes
+                .FirstOrDefault(mv => mv.UserId == model.UserId && mv.MovieId == model.MovieId);
+
+            if (existingVote == null)
+            {
+                var newVote = Mapper.Map<MovieVotes>(model);
+                DbContext.MovieVotes.Add(newVote);
+                DbContext.SaveChanges();
+            }
+            else
+            {
+                Mapper.Map(model, existingVote);
+                DbContext.SaveChanges();
+            }
+
+            return model;
+        }
+
+        public int GetRatingForExistingVote(int movieId, string userId)
+        {
+            var existingVote = DbContext.MovieVotes
+                .FirstOrDefault(mv => mv.UserId == userId && mv.MovieId == movieId);
+
+            if (existingVote == null)
+            {
+                return -1;
+            }
+
+            return existingVote.Vote;
         }
     }
 }

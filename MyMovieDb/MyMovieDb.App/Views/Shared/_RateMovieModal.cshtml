@@ -1,0 +1,32 @@
+﻿<div class="modal" tabindex="-1" role="dialog" id="rateMovieModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form asp-area="" asp-controller="Movies" asp-action="Rate" method="post">
+                <div class="modal-body">
+                    <p class="text-center" id="modalContent">
+                    </p>
+                    <div class="container">
+                        <div class="starrating d-flex justify-content-center flex-row-reverse">
+                            <input type="radio" id="star10" name="Vote" value="10" /><label for="star10" title="10 star">10</label>
+                            <input type="radio" id="star9" name="Vote" value="9" /><label for="star9" title="9 star">9</label>
+                            <input type="radio" id="star8" name="Vote" value="8" /><label for="star8" title="8 star">8</label>
+                            <input type="radio" id="star7" name="Vote" value="7" /><label for="star7" title="7 star">7</label>
+                            <input type="radio" id="star6" name="Vote" value="6" /><label for="star6" title="6 star">6</label>
+                            <input type="radio" id="star5" name="Vote" value="5" /><label for="star5" title="5 star">5</label>
+                            <input type="radio" id="star4" name="Vote" value="4" /><label for="star4" title="4 star">4</label>
+                            <input type="radio" id="star3" name="Vote" value="3" /><label for="star3" title="3 star">3</label>
+                            <input type="radio" id="star2" name="Vote" value="2" /><label for="star2" title="2 star">2</label>
+                            <input type="radio" id="star1" name="Vote" value="1" /><label for="star1" title="1 star">1</label>
+                        </div>
+                    </div>
+                    <input type="text" name="UserId" id="userToRateId" hidden/>
+                    <input type="text" name="MovieId" id="movieToRateId" hidden/>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-success">Rate</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" id="closeBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

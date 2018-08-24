@@ -55,7 +55,10 @@ namespace MyMovieDb.App.Mapping.Profiles
                     {
                         Id = ma.Person.Id,
                         Name = $"{ma.Person.FirstName} {ma.Person.LastName}",
-                    })));
+                    })))
+                .ForMember(dest => dest.AverageRating,
+                    opts => opts.MapFrom(src => (double)src.MovieVotes.Select(mv => mv.Vote).Sum() / (double)src.MovieVotes.Count))
+                .ForMember(dest => dest.VotesCount, opts => opts.MapFrom(m => m.MovieVotes.Count));
         }
     }
 }

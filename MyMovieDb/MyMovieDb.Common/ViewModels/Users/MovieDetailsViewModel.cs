@@ -33,6 +33,10 @@ namespace MyMovieDb.Common.ViewModels.Users
 
         public MovieStatus Status { get; set; }
 
+        public double AverageRating { get; set; }
+
+        public int VotesCount { get; set; }
+
         public ICollection<string> Genres { get; set; }
 
         public ICollection<PersonMovieCastViewModel> Actors { get; set; }

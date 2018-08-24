@@ -15,6 +15,7 @@ namespace MyMovieDb.App.Mapping
                 cfg.AddProfile(new GenreProfile());
                 cfg.AddProfile(new ArticleProfile());
                 cfg.AddProfile(new TheaterProgramProfile());
+                cfg.AddProfile(new MovieVotesProfile());
             });
         }
     }

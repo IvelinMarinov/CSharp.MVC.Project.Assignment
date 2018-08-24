@@ -1,12 +1,40 @@
-﻿@using MyMovieDb.Common.Constants
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+@using MyMovieDb.Common.Constants
 @model MovieDetailsViewModel
 @{
     ViewData["Title"] = "Movie Details";
 }
 
+@section Styles {
+    <link href="~/css/star-rating.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/js/rate-movie-modal.js"></script>
+    <script>
+        var userId = '@User.FindFirstValue(ClaimTypes.NameIdentifier)'
+    </script>
+}
+
+@Html.HiddenFor(m => m.Id, new {id = "movieId"})
+
 <div class="container-fluid">
-    <h1 class="text-center">@Model.Title</h1>
-    <h6 class="text-center">Duration: @Model.DurationInMinutes minutes | Genres: @string.Join(", ", Model.Genres) | Year: @(Model.PremiereDate.Year != 1 ? Model.PremiereDate.Year.ToString() : "n/a")</h6>
+    <div class="row">
+        <div class="col-sm-9">
+            <h1 class="text-center" id="movieTitle">@Model.Title</h1>
+            <h6 class="text-center">Duration: @Model.DurationInMinutes minutes | Genres: @string.Join(", ", Model.Genres) | Year: @(Model.PremiereDate.Year != 1 ? Model.PremiereDate.Year.ToString() : "n/a")</h6>
+        </div>
+        <div class="col-sm-3">
+            <h6>Average rating: <strong>@Model.AverageRating.ToString("#.00")</strong></h6>
+            <h6>From @Model.VotesCount votes</h6>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <button class="btn btn-outline-primary" id="rateMovieBtn">Rate</button>
+            }
+        </div>
+    </div>
+
     <hr />
     <div class="row">
         <div class="col-sm-3">
@@ -54,4 +82,5 @@
         </div>
     }
 
+    @Html.Partial("_RateMovieModal")
 </div>

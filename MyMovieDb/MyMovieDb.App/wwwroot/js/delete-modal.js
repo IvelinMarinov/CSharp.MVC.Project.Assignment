@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-    console.log('in')
     var deleteBtns = $('[id^=deleteBtn]');
     var itemId;
     var itemDescription;
