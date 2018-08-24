@@ -27,5 +27,22 @@ namespace MyMovieDb.Services.Users
 
             return articles;
         }
+
+        public ArticleViewModel GetArticleById(int id)
+        {
+            var model = new ArticleViewModel();
+            var articleDb = DbContext.Articles
+                .Include(a => a.Author)
+                .FirstOrDefault(a => a.Id == id);
+
+            if (articleDb == null)
+            {
+                model.SetError("No such article in database");
+                return model;
+            }
+
+            model = Mapper.Map<ArticleViewModel>(articleDb);
+            return model;
+        }
     }
 }

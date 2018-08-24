@@ -23,7 +23,7 @@
                     {
                         <p>
                             @article.Content.Substring(0, 600)&nbsp;
-                            <a asp-area="" asp-controller="Articles" asp-action="Details">Read more</a>
+                            <a asp-area="" asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id">Read more</a>
                         </p>
                     }
                 </div>

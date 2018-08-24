@@ -28,7 +28,6 @@
     <Folder Include="Areas\Admin\Views\UsersManage\" />
     <Folder Include="Areas\Moderator\Models\" />
     <Folder Include="logs\" />
-    <Folder Include="Views\Articles\" />
   </ItemGroup>
 
 </Project>

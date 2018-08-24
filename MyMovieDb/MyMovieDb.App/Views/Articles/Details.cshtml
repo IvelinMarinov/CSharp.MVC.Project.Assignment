@@ -1,0 +1,16 @@
+﻿@using MyMovieDb.Common.Constants
+@model ArticleViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-fluid">
+    <h1 class="text-center">@Model.Title</h1>
+    <h6 class="text-center">Written by: @Model.AuthorName | Posted on: @Model.CreatedDate.ToString("dd/MM/yyyy hh:mm")</h6>
+    <hr />
+
+    <div>
+        <img src="@(Model.ImageUrl ?? OtherConstants.NoImageAvailableRoute)" alt="Article photo" class="wrap details-image" />
+        <p>@Model.Content</p>
+    </div>
+</div>

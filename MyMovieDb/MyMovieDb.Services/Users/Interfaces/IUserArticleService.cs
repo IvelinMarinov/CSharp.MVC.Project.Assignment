@@ -6,5 +6,7 @@ namespace MyMovieDb.Services.Users.Interfaces
     public interface IUserArticleService
     {
         ICollection<ArticleViewModel> GetLastTenArticles();
+
+        ArticleViewModel GetArticleById(int id);
     }
 }
