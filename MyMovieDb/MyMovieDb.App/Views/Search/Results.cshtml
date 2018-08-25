@@ -38,7 +38,7 @@
         @foreach (var person in Model.PeopleFound)
         {
             <li>
-                <img src="@(person.PhotoImageUrl ?? OtherConstants.NoImageAvailableRoute)" class="search-result"/>
+                <img src="@(person.PhotoImageUrl ?? OtherConstants.NoPersonPhotoAvailableRoute)" class="search-result"/>
                 <a asp-area="" asp-controller="People" asp-action="Details" asp-route-id="@person.Id">@Html.Raw(person.Name)</a> @person.Note
             </li>
             <br />

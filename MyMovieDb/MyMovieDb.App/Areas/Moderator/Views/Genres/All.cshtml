@@ -7,32 +7,36 @@
     <script src="~/js/delete-modal.js"></script>
 }
 
-<h2>All Genres</h2>
-
+<br/>
 <div class="row">
-    <a asp-area="Moderator" asp-controller="Genres" asp-action="Add" class="btn btn-outline-secondary btn-lg">Add new genre</a>
+    <div class="col-sm-6">
+        <h2>All Genres</h2>
+    </div>
+    <div class="col-sm-6">
+        <a asp-area="Moderator" asp-controller="Genres" asp-action="Add" class="btn btn-outline-success btn-lg float-right">Add New</a>
+    </div>
 
-    <table class="table table-striped">
+    <table class="table table-responsive-md table-hover">
         <thead>
-            <tr>
-                <th>Description</th>
-                <th></th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var genre in Model)
-            {
-                <tr>
-                    <td id="item-description">@genre.Description</td>
-                    <td>
-                        <a asp-area="Moderator" asp-controller="Genres" asp-action="Edit" asp-route-id="@genre.Id" class="btn btn-outline-info">Edit</a>
-                    </td>
-                    <td>
-                        <a id="deleteBtn-@genre.Id" class="btn btn-outline-danger">Delete</a>
-                    </td>
-                </tr>
-            }
+        @foreach (var genre in Model)
+        {
+            <tr>
+                <td width="70%" id="item-description">@genre.Description</td>
+                <td width="15%">
+                    <a asp-area="Moderator" asp-controller="Genres" asp-action="Edit" asp-route-id="@genre.Id" class="btn btn-outline-info float-right">Edit</a>
+                </td>
+                <td width="15%">
+                    <a id="deleteBtn-@genre.Id" class="btn btn-outline-danger float-right">Delete</a>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 

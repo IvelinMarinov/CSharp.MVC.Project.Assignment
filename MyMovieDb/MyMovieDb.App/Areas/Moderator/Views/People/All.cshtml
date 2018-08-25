@@ -6,13 +6,16 @@
 @section Scripts {
     <script src="~/js/delete-modal.js"></script>
 }
-
-<h2>All People</h2>
-
+<br/>
 <div class="row">
-    <a asp-area="Moderator" asp-controller="People" asp-action="Add" class="btn btn-outline-secondary btn-lg">Add new person</a>
+    <div class="col-sm-6">
+        <h2>All People</h2>
+    </div>
+    <div class="col-sm-6">
+        <a asp-area="Moderator" asp-controller="People" asp-action="Add" class="btn btn-outline-success btn-lg float-right">Add New</a>
+    </div>
 
-    <table class="table table-striped">
+    <table class="table table-responsive-md table-hover">
         <thead>
         <tr>
             <th>Name</th>
@@ -24,12 +27,12 @@
         @foreach (var person in Model)
         {
             <tr>
-                <td id="item-description">@person.FullName</td>
-                <td>
-                    <a asp-area="Moderator" asp-controller="People" asp-action="Edit" asp-route-id="@person.Id" class="btn btn-outline-info">Edit</a>
+                <td width="70%" id="item-description">@person.FullName</td>
+                <td width="15%">
+                    <a asp-area="Moderator" asp-controller="People" asp-action="Edit" asp-route-id="@person.Id" class="btn btn-outline-info float-right">Edit</a>
                 </td>
-                <td>
-                    <a id="deleteBtn-@person.Id" class="btn btn-outline-danger">Delete</a>
+                <td width="15%">
+                    <a id="deleteBtn-@person.Id" class="btn btn-outline-danger float-right">Delete</a>
                 </td>
             </tr>
         }

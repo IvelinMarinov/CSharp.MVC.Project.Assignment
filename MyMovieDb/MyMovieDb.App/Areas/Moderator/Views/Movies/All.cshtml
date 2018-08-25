@@ -8,12 +8,17 @@
     ViewData["Title"] = "All Movies";
 }
 
-<h2>All Movies</h2>
 
+<br />
 <div class="row">
-    <a asp-area="Moderator" asp-controller="Movies" asp-action="Add" class="btn btn-outline-secondary btn-lg">Add new movie</a>
+    <div class="col-sm-6">
+        <h2>All Movies</h2>
+    </div>
+    <div class="col-sm-6">
+        <a asp-area="Moderator" asp-controller="Movies" asp-action="Add" class="btn btn-outline-success btn-lg float-right">Add New</a>
+    </div>
 
-    <table class="table table-striped">
+    <table class="table table-responsive-md table-hover">
         <thead>
         <tr>
             <th>Title</th>
@@ -25,17 +30,17 @@
         @foreach (var movie in Model)
         {
             <tr>
-                <td id="item-description">@movie.Title</td>
-                <td>
-                    <a asp-area="Moderator" asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-outline-info">Edit</a>
+                <td width="70%" id="item-description">@movie.Title</td>
+                <td width="15%">
+                    <a asp-area="Moderator" asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-outline-info float-right">Edit</a>
                 </td>
-                <td>
-                    <a id="deleteBtn-@movie.Id" class="btn btn-outline-danger">Delete</a>
+                <td width="15%">
+                    <a id="deleteBtn-@movie.Id" class="btn btn-outline-danger float-right">Delete</a>
                 </td>
             </tr>
         }
         </tbody>
     </table>
-    
+
     @Html.Partial("_ConfirmDeleteModal")
 </div>

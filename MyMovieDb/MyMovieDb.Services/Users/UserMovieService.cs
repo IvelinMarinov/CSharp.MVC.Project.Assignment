@@ -35,6 +35,10 @@ namespace MyMovieDb.Services.Users
             }
 
             model = Mapper.Map<MovieDetailsViewModel>(movieDb);
+            if (model.VotesCount == default(int))
+            {
+                model.AverageRating = default(int);
+            }
             return model;
         }
 

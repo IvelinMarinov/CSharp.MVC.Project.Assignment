@@ -8,7 +8,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3">
-            <img src="@(Model.PhotoImageUrl ?? OtherConstants.NoImageAvailableRoute)" alt="Person photo" class="details-image" />
+            <img src="@(Model.PhotoImageUrl ?? OtherConstants.NoPersonPhotoAvailableRoute)" alt="Person photo" class="details-image" />
         </div>
         <div class="col-sm-9">
             <h1>@Model.FirstName @Model.LastName</h1>
@@ -19,32 +19,33 @@
             <hr />
             <p>@Model.Biography</p>
 
-            <p><strong>Born:</strong> @Model.DateOfBirth.ToString("dd-MM-yyyy") in @Model.PlaceOfBirth</p>
+            <span class="text-left">Born on @Model.DateOfBirth.ToString("dd-MM-yyyy") in @Model.PlaceOfBirth</span>
         </div>
     </div>
     <br />
     <h2>Filmography:</h2>
+    <hr/>
     @if (Model.MoviesActedIn.Any())
     {
-        <p>Actor (@Model.MoviesActedIn.Count credits)</p>
+        <h4>Actor (@Model.MoviesActedIn.Count credits)</h4>
         @Html.MoviesTableFor(m => m.MoviesActedIn, Model.MoviesActedIn)
     }
 
     @if (Model.MoviesDirected.Any())
     {
-        <p>Director (@Model.MoviesDirected.Count credits)</p>
+        <h4>Director (@Model.MoviesDirected.Count credits)</h4>
         @Html.MoviesTableFor(m => m.MoviesDirected, Model.MoviesDirected)
     }
 
     @if (Model.MoviesProduced.Any())
     {
-        <p>Producer (@Model.MoviesProduced.Count credits)</p>
+        <h4>Producer (@Model.MoviesProduced.Count credits)</h4>
         @Html.MoviesTableFor(m => m.MoviesProduced, Model.MoviesProduced)
     }
 
     @if (Model.MoviesWroteScriptFor.Any())
     {
-        <p>Writer (@Model.MoviesWroteScriptFor.Count credits)</p>
+        <h4>Writer (@Model.MoviesWroteScriptFor.Count credits)</h4>
         @Html.MoviesTableFor(m => m.MoviesWroteScriptFor, Model.MoviesWroteScriptFor)
     }
 

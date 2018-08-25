@@ -17,16 +17,17 @@
     </script>
 }
 
-@Html.HiddenFor(m => m.Id, new {id = "movieId"})
+@Html.HiddenFor(m => m.Id, new { id = "movieId" })
 
+<br/>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-9">
             <h1 class="text-center" id="movieTitle">@Model.Title</h1>
             <h6 class="text-center">Duration: @Model.DurationInMinutes minutes | Genres: @string.Join(", ", Model.Genres) | Year: @(Model.PremiereDate.Year != 1 ? Model.PremiereDate.Year.ToString() : "n/a")</h6>
         </div>
-        <div class="col-sm-3">
-            <h6>Average rating: <strong>@Model.AverageRating.ToString("#.00")</strong></h6>
+        <div class="col-sm-3 float-right">
+            <h6>Average rating: <strong>@Model.AverageRating.ToString("F2")</strong></h6>
             <h6>From @Model.VotesCount votes</h6>
             @if (User.Identity.IsAuthenticated)
             {
@@ -77,8 +78,9 @@
     @foreach (var actor in Model.Actors)
     {
         <div>
-            <img src="@(actor.PhotoImageUrl ?? OtherConstants.NoImageAvailableRoute)" class="search-result" />
-            <a asp-area="" asp-controller="People" asp-action="Details" asp-route-id="@actor.Id">@actor.Name</a>
+            <img src="@(actor.PhotoImageUrl ?? OtherConstants.NoPersonPhotoAvailableRoute)" class="search-result" />
+            &nbsp;<a asp-area="" asp-controller="People" asp-action="Details" asp-route-id="@actor.Id">@actor.Name</a>
+            <hr />
         </div>
     }
 
