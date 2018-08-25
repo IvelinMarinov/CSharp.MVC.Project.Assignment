@@ -12,7 +12,6 @@
 <br />
 <h4>Delete Person</h4>
 <hr />
-<div asp-validation-summary="All" class="text-danger"></div>
 <form method="post" asp-area="Moderator" asp-controller="People" asp-action="Delete">
     @Html.HiddenFor(m => m.Id)
     <div class="row">

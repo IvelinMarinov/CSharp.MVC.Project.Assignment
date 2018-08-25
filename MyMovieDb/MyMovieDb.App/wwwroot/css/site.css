@@ -8,6 +8,7 @@ body {
 
 div.message-container {
     padding-top: 20px;
+    margin-left: 15%;
     width: 50%;
     position: absolute;
     z-index: 100000;
@@ -49,13 +50,13 @@ div.message-container {
         background-color: #363636;
     }
 
-.dropdown-item {
+.nav-item .dropdown-menu .dropdown-item {
     color: #ffc212;
     background-color: #363636;
 }
 
-    .dropdown-item:hover,
-    .dropdown-item:focus {
+    .nav-item .dropdown-menu .dropdown-item:hover,
+    .nav-item .dropdown-menu .dropdown-item:focus {
         background-color: #ffc212;
         color: #363636;
     }
@@ -94,3 +95,9 @@ p {
         background-color: #ffc212;
         border-color: #363636;
     }
+
+/*.alert-info, .alert-success {
+    color: #363636;
+    background-color: #fcd055;
+    border-color: #363636;
+}*/

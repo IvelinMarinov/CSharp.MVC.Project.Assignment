@@ -7,7 +7,6 @@
 <br />
 <h4>Edit Article</h4>
 <hr />
-<div asp-validation-summary="All" class="text-danger"></div>
 <form method="post" asp-area="Moderator" asp-controller="Articles" asp-action="Edit">
     @Html.HiddenFor(m => m.Id)
     @Html.HiddenFor(m => m.AuthorId)

@@ -17,8 +17,10 @@ namespace MyMovieDb.Common.BindingModels.Moderator
         [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
 
+        [Required]
         public string AuthorId { get; set; }
 
+        [Required]
         public DateTime CreatedDate { get; set; }
     }
 }
