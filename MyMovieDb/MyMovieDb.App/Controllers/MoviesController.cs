@@ -26,8 +26,6 @@ namespace MyMovieDb.App.Controllers
                 return this.RedirectToAction("Index", "Home");
             }
 
-            SetMessage(MessageType.Info, "Testing");
-
             var movie = this.movieService.GetMovieById(id.Value);
             return View(movie);
         }

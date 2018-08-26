@@ -65,6 +65,12 @@ namespace MyMovieDb.Services.Moderator
                 return model;
             }
 
+            if (DbContext.Genres.Any(g => g.Id != model.Id && g.Description == model.Description))
+            {
+                model.SetError("Genre already exists");
+                return model;
+            }
+
             Mapper.Map(model, genre);
 
             DbContext.Genres.Update(genre);
@@ -81,7 +87,7 @@ namespace MyMovieDb.Services.Moderator
 
             if (genre == null)
             {
-                model.SetError("No such person in database");
+                model.SetError("No such genre in database");
                 return model;
             }
 

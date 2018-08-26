@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovieDb.App", "MyMovieDb.App\MyMovieDb.App.csproj", "{79DBC294-572D-442A-A133-B809150575A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMovieDb.App", "MyMovieDb.App\MyMovieDb.App.csproj", "{79DBC294-572D-442A-A133-B809150575A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovieDb.Models", "MyMovieDb.Models\MyMovieDb.Models.csproj", "{0ADC2F42-2AD8-46BE-9908-D3D5E2CDEE75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMovieDb.Models", "MyMovieDb.Models\MyMovieDb.Models.csproj", "{0ADC2F42-2AD8-46BE-9908-D3D5E2CDEE75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovieDb.Data", "MyMovieDb.Data\MyMovieDb.Data.csproj", "{E0A58361-A739-4617-85EB-AB560A45B4A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMovieDb.Data", "MyMovieDb.Data\MyMovieDb.Data.csproj", "{E0A58361-A739-4617-85EB-AB560A45B4A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovieDb.Services", "MyMovieDb.Services\MyMovieDb.Services.csproj", "{C8DEBA57-7720-4647-8699-4161065DAF96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMovieDb.Services", "MyMovieDb.Services\MyMovieDb.Services.csproj", "{C8DEBA57-7720-4647-8699-4161065DAF96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovieDb.Common", "MyMovieDb.Common\MyMovieDb.Common.csproj", "{7DDC3D7C-B7E5-47B5-932D-6E08658276F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMovieDb.Common", "MyMovieDb.Common\MyMovieDb.Common.csproj", "{7DDC3D7C-B7E5-47B5-932D-6E08658276F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovieDb.Tests", "MyMovieDb.Tests\MyMovieDb.Tests.csproj", "{B1DCD013-1584-466B-B59A-11B0E0292BF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7DDC3D7C-B7E5-47B5-932D-6E08658276F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DDC3D7C-B7E5-47B5-932D-6E08658276F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DDC3D7C-B7E5-47B5-932D-6E08658276F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1DCD013-1584-466B-B59A-11B0E0292BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1DCD013-1584-466B-B59A-11B0E0292BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1DCD013-1584-466B-B59A-11B0E0292BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1DCD013-1584-466B-B59A-11B0E0292BF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
