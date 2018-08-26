@@ -15,8 +15,8 @@ namespace MyMovieDb.App.Helpers
         {
             using (var writer = new StringWriter())
             {
-                var label = htmlHelper.LabelFor(expression, new { @class = "control-label" });
-                var editor = htmlHelper.EditorFor(expression, new { htmlAttributes = new { @class = "form-control" } });
+                var label = htmlHelper.LabelFor(expression);
+                var editor = htmlHelper.TextBoxFor(expression, new { @class = "form-control" });
                 var validationMessage = htmlHelper.ValidationMessageFor(expression, null, new { @class = "text-danger" });
 
                 writer.Write("<div class=\"form-group\">");

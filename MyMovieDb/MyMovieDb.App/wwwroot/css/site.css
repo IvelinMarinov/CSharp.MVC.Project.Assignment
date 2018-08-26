@@ -85,7 +85,7 @@ p {
 
 .btn-outline-yellow {
     color: #ffc212;
-    background-color: transparent;
+    background-color: #363636;
     background-image: none;
     border-color: #ffc212;
 }
@@ -95,6 +95,14 @@ p {
         background-color: #ffc212;
         border-color: #363636;
     }
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(255, 194, 18, 15);
+}
 
 /*.alert-info, .alert-success {
     color: #363636;
